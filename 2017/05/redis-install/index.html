@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="快速跑起来 官网下载源码包 解压安装: tar zxvf redis-3.2.8.tar.gz 进入目录: cd redis-3.2.8/ 编译: make 编译完成后, 最重要的两个文件是: src目录里面的redis-server redis-cli两个文件, 把这个文件拷贝到PATH中即可运行. 简陋地运行一下: src/redis-server redis.conf 命令后指定配置文件即可">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis安装与服务配置">
+<meta property="og:url" content="http://pengxiulin.github.io/2017/05/redis-install/index.html">
+<meta property="og:site_name" content="XStack">
+<meta property="og:description" content="快速跑起来 官网下载源码包 解压安装: tar zxvf redis-3.2.8.tar.gz 进入目录: cd redis-3.2.8/ 编译: make 编译完成后, 最重要的两个文件是: src目录里面的redis-server redis-cli两个文件, 把这个文件拷贝到PATH中即可运行. 简陋地运行一下: src/redis-server redis.conf 命令后指定配置文件即可">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-15T10:08:59.465Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis安装与服务配置">
+<meta name="twitter:description" content="快速跑起来 官网下载源码包 解压安装: tar zxvf redis-3.2.8.tar.gz 进入目录: cd redis-3.2.8/ 编译: make 编译完成后, 最重要的两个文件是: src目录里面的redis-server redis-cli两个文件, 把这个文件拷贝到PATH中即可运行. 简陋地运行一下: src/redis-server redis.conf 命令后指定配置文件即可">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pengxiulin.github.io/2017/05/redis-install/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Redis安装与服务配置 | XStack</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XStack</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Deep into details</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pengxiulin.github.io/2017/05/redis-install/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiulin">
+      <meta itemprop="description" content="foo bar">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XStack">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Redis安装与服务配置
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-05-03 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-03T00:00:00+08:00">2017-05-03</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="快速跑起来"><a href="#快速跑起来" class="headerlink" title="快速跑起来"></a>快速跑起来</h2><ol>
+<li><a href="https://redis.io/download" target="_blank" rel="noopener">官网下载源码包</a></li>
+<li>解压安装: <code>tar zxvf redis-3.2.8.tar.gz</code></li>
+<li>进入目录: <code>cd redis-3.2.8/</code></li>
+<li>编译: <code>make</code><br> 编译完成后, 最重要的两个文件是: src目录里面的<code>redis-server redis-cli</code>两个文件, 把这个文件拷贝到PATH中即可运行.</li>
+<li>简陋地运行一下: <code>src/redis-server redis.conf</code> 命令后指定配置文件即可跑起来</li>
+</ol>
+<h2 id="更好的封装"><a href="#更好的封装" class="headerlink" title="更好的封装"></a>更好的封装</h2><p>参照Nginx的形式, 做了如下的处理:</p>
+<ol>
+<li>创建主目录: <code>sudo mkdir /usr/local/redis</code></li>
+<li>主目录内的目录结构: </li>
+<li>bin - 主要存放<code>redis-server redis-cli</code>两个可执行文件, 把这个目录放到PATH中即可(我是图方便直接修改了<code>/etc/profile</code>文件) 按照标准, 应该区分sbin和bin目录, 就不再找麻烦了吧</li>
+<li>conf - 主要存放配置文件(复制、修改自源码目录下的<code>redis.conf</code>这个文件)<br> 按照需要修改端口号,监听地址(0.0.0.0),logfile路径,pidfile路径, <code>daemonize yes</code>, <code>dir /usr/local/redis/</code>, <code>dbfilename dump.rdb</code>等</li>
+<li>logs - 把日志输出到这里(<code>logs/redis.log</code>)</li>
+<li>redis.pid(文件 - 保存redis的pid)</li>
+<li>dump.rdb(文件 - 保存redis数据)</li>
+<li><p>作为服务启动:<br> 复制如下内容到<code>/etc/init.d/redis</code>, 里面的前两行注释是给chkconfig使用的, 之后的启动命令就是以www用户启动服务(<code>sudo -u www $EXEC $CONF</code>)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> chkconfig:   2345 90 10</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description:  Redis is a persistent key-value database</span></span><br><span class="line">PATH=/usr/local/bin:/sbin:/usr/bin:/bin</span><br><span class="line"></span><br><span class="line">REDISPORT=6378</span><br><span class="line">EXEC=/usr/local/redis/bin/redis-server</span><br><span class="line">REDIS_CLI=/usr/local/redis/bin/redis-cli</span><br><span class="line"></span><br><span class="line">PIDFILE=/usr/local/redis/redis.pid</span><br><span class="line">CONF="/usr/local/redis/conf/redis.conf"</span><br><span class="line"></span><br><span class="line">case "$1" in</span><br><span class="line">    start)</span><br><span class="line">        if [ -f $PIDFILE ]</span><br><span class="line">        then</span><br><span class="line">                echo "$PIDFILE exists, process is already running or crashed"</span><br><span class="line">        else</span><br><span class="line">                echo "Starting Redis server..."</span><br><span class="line">                sudo -u www $EXEC $CONF</span><br><span class="line">        fi</span><br><span class="line">        if [ "$?"="0" ]</span><br><span class="line">        then</span><br><span class="line">              echo "Redis is running..."</span><br><span class="line">        fi</span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        if [ ! -f $PIDFILE ]</span><br><span class="line">        then</span><br><span class="line">                echo "$PIDFILE does not exist, process is not running"</span><br><span class="line">        else</span><br><span class="line">                PID=$(cat $PIDFILE)</span><br><span class="line">                echo "Stopping ..."</span><br><span class="line">                $REDIS_CLI -p $REDISPORT -a 123wujiecao SHUTDOWN</span><br><span class="line">                while [ -x $&#123;PIDFILE&#125; ]</span><br><span class="line">               do</span><br><span class="line">                    echo "Waiting for Redis to shutdown ..."</span><br><span class="line">                    sleep 1</span><br><span class="line">                done</span><br><span class="line">                echo "Redis stopped"</span><br><span class="line">        fi</span><br><span class="line">        ;;</span><br><span class="line">   restart|force-reload)</span><br><span class="line">        $&#123;0&#125; stop</span><br><span class="line">        $&#123;0&#125; start</span><br><span class="line">        ;;</span><br><span class="line">  *)</span><br><span class="line">    echo "Usage: /etc/init.d/redis &#123;start|stop|restart|force-reload&#125;" &gt;&amp;2</span><br><span class="line">        exit 1</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启停命令<code>service redis start</code>、<code>service redis stop</code></p>
+</li>
+<li>注册为启动命令: <code>sudo chkconfig --add redis</code><br>检查是否成功: <code>chkconfig --list redis</code>, 如果返回类似<code>redis 0:off 1:off 2:on 3:on 4:on 5:on 6:off</code>的结果就说明成功了</li>
+</ol>
+<h2 id="PS-强制关闭进程"><a href="#PS-强制关闭进程" class="headerlink" title="PS: 强制关闭进程"></a>PS: 强制关闭进程</h2><p>遇到一个颇尴尬的问题: 启动后, 由于配置文件中没有指定<code>dir /usr/local/redis/</code>, 导致redis关闭的时候写文件时没有权限, 就不能完成关闭, 就怎么都不能关闭服务, 只能强制杀死进程:<code>sudo kill -9 &lt;pid&gt;</code></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/macOS-bin/" rel="next" title="macOS命令行下查看二进制文件">
+                <i class="fa fa-chevron-left"></i> macOS命令行下查看二进制文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/log-experience/" rel="prev" title="日志记录经验小结">
+                日志记录经验小结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">xiulin</p>
+              <p class="site-description motion-element" itemprop="description">foo bar</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#快速跑起来"><span class="nav-number">1.</span> <span class="nav-text">快速跑起来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更好的封装"><span class="nav-number">2.</span> <span class="nav-text">更好的封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PS-强制关闭进程"><span class="nav-number">3.</span> <span class="nav-text">PS: 强制关闭进程</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiulin</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

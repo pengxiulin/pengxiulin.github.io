@@ -330,15 +330,15 @@ $(document).ready(function() {
         };
 
         //$post.velocity('transition.slideDownIn', postMotionOptions);
-        if (CONFIG.motion.transition.post_block) {
-          $postBlock.velocity('transition.' + $postBlockTransition, postMotionOptions);
-        }
-        if (CONFIG.motion.transition.post_header) {
-          $postHeader.velocity('transition.' + $postHeaderTransition, postMotionOptions);
-        }
-        if (CONFIG.motion.transition.post_body) {
-          $postBody.velocity('transition.' + $postBodyTransition, postMotionOptions);
-        }
+        // if (CONFIG.motion.transition.post_block) {
+        //   $postBlock.velocity('transition.' + $postBlockTransition, postMotionOptions);
+        // }
+        // if (CONFIG.motion.transition.post_header) {
+        //   $postHeader.velocity('transition.' + $postHeaderTransition, postMotionOptions);
+        // }
+        // if (CONFIG.motion.transition.post_body) {
+        //   $postBody.velocity('transition.' + $postBodyTransition, postMotionOptions);
+        // }
         if (CONFIG.motion.transition.coll_header) {
           $collHeader.velocity('transition.' + $collHeaderTransition, postMotionOptions);
         }

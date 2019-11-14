@@ -1187,15 +1187,15 @@ pre .javascript .function {
   color: #999;
 }
 .use-motion .brand {
-  opacity: 0;
+  opacity: initial;
 }
 .use-motion .logo,
 .use-motion .site-title,
 .use-motion .site-subtitle,
 .use-motion .custom-logo-image {
-  opacity: 0;
+  opacity: initial;
   position: relative;
-  top: -10px;
+  top: -5px;
 }
 .site-nav-toggle {
   display: none;
@@ -1307,16 +1307,16 @@ pre .javascript .function {
 .use-motion .post-block,
 .use-motion .pagination,
 .use-motion .comments {
-  opacity: 0;
+  opacity: initial;
 }
 .use-motion .post-header {
-  opacity: 0;
+  opacity: initial;
 }
 .use-motion .post-body {
-  opacity: 0;
+  opacity: initial;
 }
 .use-motion .collection-title {
-  opacity: 0;
+  opacity: initial;
 }
 .posts-expand {
   padding-top: 40px;
@@ -1895,7 +1895,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #45087c;
+  background: #afffd6;
 }
 .links-of-blogroll {
   font-size: 13px;

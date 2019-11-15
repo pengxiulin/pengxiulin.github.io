@@ -1203,11 +1203,6 @@ pre .javascript .function {
   top: 10px;
   left: 10px;
 }
-@media (max-width: 767px) {
-  .site-nav-toggle {
-    display: block;
-  }
-}
 .site-nav-toggle button {
   margin-top: 2px;
   padding: 9px 10px;
@@ -1216,7 +1211,7 @@ pre .javascript .function {
 }
 @media (max-width: 767px) {
   .site-nav {
-    display: none;
+    display: block;
     margin: 0 -10px;
     padding: 0 10px;
     clear: both;
@@ -1267,7 +1262,7 @@ pre .javascript .function {
   margin-right: 5px;
 }
 .use-motion .menu-item {
-  opacity: 0;
+  opacity: initial;
 }
 .post-body {
   overflow-wrap: break-word;
@@ -1895,7 +1890,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #afffd6;
+  background: #0ff6e0;
 }
 .links-of-blogroll {
   font-size: 13px;

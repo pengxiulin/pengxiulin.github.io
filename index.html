@@ -257,6 +257,302 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pengxiulin.github.io/2019/12/rtmp/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiulin">
+      <meta itemprop="description" content="foo bar">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XStack">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/12/rtmp/" class="post-title-link" itemprop="url">RTMP推流到Nginx并播放</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span>发布时间:</span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-12-01T00:00:00+08:00">2019-12-01</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>周末使用RTMP做了几个简单实验，记录如下：</p>
+<ul>
+<li>推送一个本地文件</li>
+<li>录制本地屏幕推送到远程</li>
+</ul>
+<h2 id="获取所有可以录制的视频源"><a href="#获取所有可以录制的视频源" class="headerlink" title="获取所有可以录制的视频源"></a>获取所有可以录制的视频源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -devices</span><br><span class="line">$ ffmpeg -f avfoundation -list_devices <span class="literal">true</span> -i <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># outputs like:</span></span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] AVFoundation video devices:</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] [0] FaceTime HD Camera</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] [1] Capture screen 0</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] AVFoundation audio devices:</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] [0] Built-in Microphone</span><br></pre></td></tr></table></figure>
+<h2 id="推流一个本地文件"><a href="#推流一个本地文件" class="headerlink" title="推流一个本地文件"></a>推流一个本地文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -re -stream_loop -1 -i out.mp4 -vcodec libx264 -acodec aac -f flv rtmp://xxxx.com:1935/hls/<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<h2 id="录制屏幕"><a href="#录制屏幕" class="headerlink" title="录制屏幕"></a>录制屏幕</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -f avfoundation -i <span class="string">"Capture screen 0"</span> -r:v 30</span><br></pre></td></tr></table></figure>
+<h2 id="播放视频"><a href="#播放视频" class="headerlink" title="播放视频"></a>播放视频</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffplay https://xxxx.com/hls/test.m3u8</span><br></pre></td></tr></table></figure>
+<h2 id="录制屏幕并推流"><a href="#录制屏幕并推流" class="headerlink" title="录制屏幕并推流"></a>录制屏幕并推流</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -f avfoundation -i <span class="string">"Capture screen 0"</span> -r:v 30 -vcodec libx264 -acodec aac -f flv rtmp://xxxx.com:1935/hls/<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<h2 id="附：Nginx上安装rtmp服务器"><a href="#附：Nginx上安装rtmp服务器" class="headerlink" title="附：Nginx上安装rtmp服务器"></a>附：Nginx上安装rtmp服务器</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>要在Nginx实现rtmp服务器，需要安装<code>nginx-rtmp-module</code>模块，具体方法是clone一份最新的源码，随nginx一起编译：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/arut/nginx-rtmp-module</span><br><span class="line">$ <span class="built_in">cd</span> nginx-x.x.x</span><br><span class="line">$ ./configure --prefix=/usr/<span class="built_in">local</span>/nginx --with-http_v2_module --with-http_ssl_module --with-openssl=../openssl-1.1.1d --add-module=../nginx-rtmp-module</span><br></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">rtmp &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen 1935;</span><br><span class="line">        application live &#123;</span><br><span class="line">            live on;</span><br><span class="line">        &#125;</span><br><span class="line">        application hls &#123;</span><br><span class="line">            live on;</span><br><span class="line">            hls on;</span><br><span class="line">            hls_path /tmp/hls;</span><br><span class="line">        &#125;</span><br><span class="line">        application vod &#123;</span><br><span class="line">            play /tmp/video;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># server中添加一个目录，并配置mimetype</span></span><br><span class="line">location /hls &#123;</span><br><span class="line">    types &#123;</span><br><span class="line">        application/vnd.apple.mpegurl m3u8;</span><br><span class="line">        video/mp2t ts;</span><br><span class="line">    &#125;</span><br><span class="line">    root /tmp;</span><br><span class="line">    add_header Cache-Control no-cache;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置完成后重启就可以接收推流了</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pengxiulin.github.io/2019/11/plantuml/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiulin">
+      <meta itemprop="description" content="foo bar">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XStack">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/11/plantuml/" class="post-title-link" itemprop="url">PlantUML测试</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span>发布时间:</span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-22 00:00:00" itemprop="dateCreated datePublished" datetime="2019-11-22T00:00:00+08:00">2019-11-22</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Hexo中增加PlantUML"><a href="#Hexo中增加PlantUML" class="headerlink" title="Hexo中增加PlantUML"></a>Hexo中增加PlantUML</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-tag-plantuml --save</span><br></pre></td></tr></table></figure>
+<h2 id="快速Demo"><a href="#快速Demo" class="headerlink" title="快速Demo"></a>快速Demo</h2><img src="http://www.plantuml.com/plantuml/svg/SoWkIImgAStDuKfCBialKdW-PSMpZkqAYSKAJaNvvSMfHLm5GFdCvCo2nBmI1R_ybDJWrAAor2AGYhnY54adLowG8PbbYIMfSDrGMa7N3bcpbSABlkrF-wUzNBZrvTn525q89Ln8ge5wdLo1UfvDQt--Ui6J_GkVDQv7iicLAp6dHE7Pd4uKUGLa-snqTR4OeQ2Gaefi38eMcAKGXmA3vSNwbXVhTi6rujG8j-l5_YbFPyz3quPk8onyGBfG0mYi6nf0AFgG0YarfpXLuTccXN3F4-MmftkQdkxOWTD9s2mYw528cOIScvV2XMmRD8se0vKNbnJbLy95780gWMaI0000">
+<img src="http://www.plantuml.com/plantuml/svg/ZPFBIiD068NtUOhPkSeBY4WjPAiBds3837GWJSfaKd6d8dXNX1eerajS1GG3GccmjNsPJfA-XPDBqqnfgQimEUVxpycVf6OpI9dJD1IeCuk2kED7bmC0RL2drf6DgT8IEj592veCw4rREiV3jsbu4dU7_FSfPGxs7DQG7ICt6J_ohf_A6Y8YGzAJO1pxDr7lZbzxMIfq6iGaK395xaNiJt8JltLJ7qAPRc0bBKxQaE6oSN45wYxOjn0-nBGjJjiWkH_m1tVczMSl7mjgOL4gRi7MDS6aqP_lquaNdGQL94s1XkZLkv9qKCtRKTKL8m10k3f6GkQXUL7nAfBWFFdwAT6rO9cLJ3hy-NK9MqwSxoUbv0LbTB4WYQii2His1j6tLpxyluhnqHaFmxMLLWLjB9hFt5JNH4erhVX6jeJTPjGwBk_KX5Fy1ty0">
+<h2 id="活动图Demo"><a href="#活动图Demo" class="headerlink" title="活动图Demo"></a>活动图Demo</h2><img src="http://www.plantuml.com/plantuml/svg/Aov9B2hXidhPsljyxpglnBB4vtthdovgjkQoUhAZ-yNUlGM9UIMbkJbwMOb5GB7dUwOzRPlvhB__nVuDpwQrFzcz3IZuh7FvYuKzrbp59Va50000">
+<h2 id="时序图Demo"><a href="#时序图Demo" class="headerlink" title="时序图Demo"></a>时序图Demo</h2><img src="http://www.plantuml.com/plantuml/svg/Syp9J4vLqBLJSCfFib9mB2t9ICqhoKnEBCdCprC8IYqiJIqkuGBAAUW2rJY256DHLLoGdrUSoiNbY6fONZvGNP52OaafDaCXYcrqTT5KOpSS0000">
+<h2 id="用例图Demo"><a href="#用例图Demo" class="headerlink" title="用例图Demo"></a>用例图Demo</h2><img src="http://www.plantuml.com/plantuml/svg/NL2x3i8m4Dlp5HPJEz2XOmS47m0BiB4SxK63qakL1CJdaqS54bAK-6oVaylM1tBXEHdLxKaBTiEafGFvWbHrzemmCcYUZUufQ2jrafDGAnLtX_K6rJ7br4kTYABdb4Zy6B61uVHz3B2tSWiwd4Rj4HS9-4tJRBZvjvR-7JBRHoCPRzMLOGMUN-p8m6XXhrY6x5eILZaymtZsLeJxmCD5WlqsskiZahvPfTaEhLhcGTEawj0cK1wmZUdnlpu0">
+<h2 id="类图Demo"><a href="#类图Demo" class="headerlink" title="类图Demo"></a>类图Demo</h2><img src="http://www.plantuml.com/plantuml/svg/SoWkIImgAStDuNBEIImkDZ1KiAdHrLM0S8oWWiOAMd0n4wYOgK8-NCmCAcQkeAS75RA02bagm5GP6d0vfEQb0Aq20000">
+<h2 id="活动图Demo-1"><a href="#活动图Demo-1" class="headerlink" title="活动图Demo"></a>活动图Demo</h2><img src="http://www.plantuml.com/plantuml/svg/qz3ILD0jBT2rKr1ooomgBb5mJ2x9BCiigLJYqYtAJCye0Sa4foRdvwKWIu54Gp8oYr04SrBJGCerj3G1">
+<h2 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h2><img src="http://www.plantuml.com/plantuml/svg/dP4_2y8m4CNtV8gRXO9_S76GWZYu537W8WwXETj8ca2RjeFqktkf1b9rCajox_tU7KdInedQjPLcJIuqmcezXrv9LxBBx0f9ieNCEbvQwvGf62FQOIp1Wm44z20rKkctiTvPSrD5Mtjk0_lkLHCH6o4O4qEO58Fnf0pxiz0jSjIOEsKDUL_QX3pMs2dinob1YqB1_jby4ZhXdLIKVuMvw2X9qVT3VZJmLwJ5lRa0wZQUbgJIYmmiHIFfgvu0">
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://blog.csdn.net/geduo_83/article/details/86422485" target="_blank" rel="noopener">PlantUML画类图、流程图、时序图使用详解</a><br><a href="https://nipgeihou.com/Hexo/hexo_uml/" target="_blank" rel="noopener">【Hexo】使用PlantUML插件画UML图</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pengxiulin.github.io/2017/06/font-define-combination/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1400,292 +1696,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pengxiulin.github.io/2017/04/macOS-bin/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xiulin">
-      <meta itemprop="description" content="foo bar">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XStack">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/04/macOS-bin/" class="post-title-link" itemprop="url">macOS命令行下查看二进制文件</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span>发布时间:</span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-04-20 00:00:00" itemprop="dateCreated datePublished" datetime="2017-04-20T00:00:00+08:00">2017-04-20</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><code>$ xxd ***.bin</code><br>vim下可以调用xxd来查看:<code>%!xxd</code><br>使用od命令也可以, 输出也更友好<br><code>$ od -t x1 boot.bin</code></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pengxiulin.github.io/2017/04/zsh-prompt/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xiulin">
-      <meta itemprop="description" content="foo bar">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XStack">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/04/zsh-prompt/" class="post-title-link" itemprop="url">My ZSH Prompt</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span>发布时间:</span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-04-19 00:00:00" itemprop="dateCreated datePublished" datetime="2017-04-19T00:00:00+08:00">2017-04-19</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h2><p>显示上调命令返回状态➜路径@时间</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">local</span> ret_status=<span class="string">"%(?:%&#123;<span class="variable">$fg_bold</span>[green]%&#125;➜ :%&#123;<span class="variable">$fg_bold</span>[red]%&#125;➜ )"</span></span><br><span class="line">PROMPT=<span class="string">'$&#123;ret_status&#125;%&#123;$fg[cyan]%&#125;%c%&#123;$reset_color%&#125;@%&#123;$fg[blue]%&#125;%`date "+\%H:%M"`%&#123;$reset_color%&#125;\$'</span></span><br></pre></td></tr></table></figure>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ol>
-<li>把git状态干掉了, 加上以后在大项目下面,会很卡,明显影响效率</li>
-<li>oh-my-zsh的prompt设置在theme里面(theme设置在<code>~/.zshrc</code>里面, 比如我的主题存放在<code>~/.oh-my-zsh/themes/robbyrussell.zsh-theme</code>)</li>
-<li>bash是$PS1,不过,上面的命令仅适用于zsh</li>
-</ol>
-<p>以上, 备忘</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1728,7 +1743,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1801,9 +1816,7 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="author" itemprop="copyrightHolder">xiulin</span>
-
-  
+  <span class="author" itemprop="copyrightHolder">xiulin</span>  <a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备14050451号 </a>
 
   
 </div>

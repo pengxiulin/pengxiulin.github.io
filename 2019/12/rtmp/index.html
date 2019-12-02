@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  <meta name="description" content="周末使用RTMP做了几个简单实验，记录如下：  推送一个本地文件 录制本地屏幕推送到远程  获取所有可以录制的视频源123456789$ ffmpeg -devices$ ffmpeg -f avfoundation -list_devices true -i &quot;&quot;# outputs like:[AVFoundation input device @ 0x7ff7d0504640] AVFound">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RTMP推流到Nginx并播放">
+<meta property="og:url" content="http://pengxiulin.github.io/2019/12/rtmp/index.html">
+<meta property="og:site_name" content="XStack">
+<meta property="og:description" content="周末使用RTMP做了几个简单实验，记录如下：  推送一个本地文件 录制本地屏幕推送到远程  获取所有可以录制的视频源123456789$ ffmpeg -devices$ ffmpeg -f avfoundation -list_devices true -i &quot;&quot;# outputs like:[AVFoundation input device @ 0x7ff7d0504640] AVFound">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-02T13:49:43.236Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RTMP推流到Nginx并播放">
+<meta name="twitter:description" content="周末使用RTMP做了几个简单实验，记录如下：  推送一个本地文件 录制本地屏幕推送到远程  获取所有可以录制的视频源123456789$ ffmpeg -devices$ ffmpeg -f avfoundation -list_devices true -i &quot;&quot;# outputs like:[AVFoundation input device @ 0x7ff7d0504640] AVFound">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pengxiulin.github.io/2019/12/rtmp/">
+
+
+
+
+  <title>RTMP推流到Nginx并播放 | XStack</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XStack</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Deep into details</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pengxiulin.github.io/2019/12/rtmp/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiulin">
+      <meta itemprop="description" content="foo bar">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XStack">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RTMP推流到Nginx并播放
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span>发布时间:</span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-12-01T00:00:00+08:00">2019-12-01</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>周末使用RTMP做了几个简单实验，记录如下：</p>
+<ul>
+<li>推送一个本地文件</li>
+<li>录制本地屏幕推送到远程</li>
+</ul>
+<h2 id="获取所有可以录制的视频源"><a href="#获取所有可以录制的视频源" class="headerlink" title="获取所有可以录制的视频源"></a>获取所有可以录制的视频源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -devices</span><br><span class="line">$ ffmpeg -f avfoundation -list_devices <span class="literal">true</span> -i <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># outputs like:</span></span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] AVFoundation video devices:</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] [0] FaceTime HD Camera</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] [1] Capture screen 0</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] AVFoundation audio devices:</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] [0] Built-in Microphone</span><br></pre></td></tr></table></figure>
+<h2 id="推流一个本地文件"><a href="#推流一个本地文件" class="headerlink" title="推流一个本地文件"></a>推流一个本地文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -re -stream_loop -1 -i out.mp4 -vcodec libx264 -acodec aac -f flv rtmp://xxxx.com:1935/hls/<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<h2 id="录制屏幕"><a href="#录制屏幕" class="headerlink" title="录制屏幕"></a>录制屏幕</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -f avfoundation -i <span class="string">"Capture screen 0"</span> -r:v 30</span><br></pre></td></tr></table></figure>
+<h2 id="播放视频"><a href="#播放视频" class="headerlink" title="播放视频"></a>播放视频</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffplay https://xxxx.com/hls/test.m3u8</span><br></pre></td></tr></table></figure>
+<h2 id="录制屏幕并推流"><a href="#录制屏幕并推流" class="headerlink" title="录制屏幕并推流"></a>录制屏幕并推流</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -f avfoundation -i <span class="string">"Capture screen 0"</span> -r:v 30 -vcodec libx264 -acodec aac -f flv rtmp://xxxx.com:1935/hls/<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<h2 id="附：Nginx上安装rtmp服务器"><a href="#附：Nginx上安装rtmp服务器" class="headerlink" title="附：Nginx上安装rtmp服务器"></a>附：Nginx上安装rtmp服务器</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>要在Nginx实现rtmp服务器，需要安装<code>nginx-rtmp-module</code>模块，具体方法是clone一份最新的源码，随nginx一起编译：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/arut/nginx-rtmp-module</span><br><span class="line">$ <span class="built_in">cd</span> nginx-x.x.x</span><br><span class="line">$ ./configure --prefix=/usr/<span class="built_in">local</span>/nginx --with-http_v2_module --with-http_ssl_module --with-openssl=../openssl-1.1.1d --add-module=../nginx-rtmp-module</span><br></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">rtmp &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen 1935;</span><br><span class="line">        application live &#123;</span><br><span class="line">            live on;</span><br><span class="line">        &#125;</span><br><span class="line">        application hls &#123;</span><br><span class="line">            live on;</span><br><span class="line">            hls on;</span><br><span class="line">            hls_path /tmp/hls;</span><br><span class="line">        &#125;</span><br><span class="line">        application vod &#123;</span><br><span class="line">            play /tmp/video;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># server中添加一个目录，并配置mimetype</span></span><br><span class="line">location /hls &#123;</span><br><span class="line">    types &#123;</span><br><span class="line">        application/vnd.apple.mpegurl m3u8;</span><br><span class="line">        video/mp2t ts;</span><br><span class="line">    &#125;</span><br><span class="line">    root /tmp;</span><br><span class="line">    add_header Cache-Control no-cache;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置完成后重启就可以接收推流了</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/plantuml/" rel="next" title="PlantUML测试">
+                <i class="fa fa-chevron-left"></i> PlantUML测试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">xiulin</p>
+              <p class="site-description motion-element" itemprop="description">foo bar</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取所有可以录制的视频源"><span class="nav-number">1.</span> <span class="nav-text">获取所有可以录制的视频源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推流一个本地文件"><span class="nav-number">2.</span> <span class="nav-text">推流一个本地文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#录制屏幕"><span class="nav-number">3.</span> <span class="nav-text">录制屏幕</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播放视频"><span class="nav-number">4.</span> <span class="nav-text">播放视频</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#录制屏幕并推流"><span class="nav-number">5.</span> <span class="nav-text">录制屏幕并推流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附：Nginx上安装rtmp服务器"><span class="nav-number">6.</span> <span class="nav-text">附：Nginx上安装rtmp服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">6.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">6.2.</span> <span class="nav-text">配置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="author" itemprop="copyrightHolder">xiulin</span>  <a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备14050451号 </a>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v6.7.0
+  <span class="post-meta-divider">|</span>
+  <a href="https://www.ssllabs.com/ssltest/analyze.html?d=pengxiulin.com" target="_blank">https性能</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+  
+
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

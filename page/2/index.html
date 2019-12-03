@@ -347,7 +347,7 @@
 <h2 id="更好的封装"><a href="#更好的封装" class="headerlink" title="更好的封装"></a>更好的封装</h2><p>参照Nginx的形式, 做了如下的处理:</p>
 <ol>
 <li>创建主目录: <code>sudo mkdir /usr/local/redis</code></li>
-<li>主目录内的目录结构: </li>
+<li>主目录内的目录结构:</li>
 <li>bin - 主要存放<code>redis-server redis-cli</code>两个可执行文件, 把这个目录放到PATH中即可(我是图方便直接修改了<code>/etc/profile</code>文件) 按照标准, 应该区分sbin和bin目录, 就不再找麻烦了吧</li>
 <li>conf - 主要存放配置文件(复制、修改自源码目录下的<code>redis.conf</code>这个文件)<br> 按照需要修改端口号,监听地址(0.0.0.0),logfile路径,pidfile路径, <code>daemonize yes</code>, <code>dir /usr/local/redis/</code>, <code>dbfilename dump.rdb</code>等</li>
 <li>logs - 把日志输出到这里(<code>logs/redis.log</code>)</li>
@@ -1725,7 +1725,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

@@ -73,18 +73,18 @@
 
 
 
-  <meta name="description" content="快速跑起来 官网下载源码包 解压安装: tar zxvf redis-3.2.8.tar.gz 进入目录: cd redis-3.2.8/ 编译: make 编译完成后, 最重要的两个文件是: src目录里面的redis-server redis-cli两个文件, 把这个文件拷贝到PATH中即可运行. 简陋地运行一下: src/redis-server redis.conf 命令后指定配置文件即可">
+  <meta name="description" content="快速跑起来# 官网下载源码包 解压安装: tar zxvf redis-3.2.8.tar.gz 进入目录: cd redis-3.2.8/ 编译: make 编译完成后, 最重要的两个文件是: src目录里面的redis-server redis-cli两个文件, 把这个文件拷贝到PATH中即可运行. 简陋地运行一下: src/redis-server redis.conf 命令后指定配置文件即">
 <meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis安装与服务配置">
 <meta property="og:url" content="https://pengxiulin.com/2017/05/redis-install/index.html">
 <meta property="og:site_name" content="XStack">
-<meta property="og:description" content="快速跑起来 官网下载源码包 解压安装: tar zxvf redis-3.2.8.tar.gz 进入目录: cd redis-3.2.8/ 编译: make 编译完成后, 最重要的两个文件是: src目录里面的redis-server redis-cli两个文件, 把这个文件拷贝到PATH中即可运行. 简陋地运行一下: src/redis-server redis.conf 命令后指定配置文件即可">
+<meta property="og:description" content="快速跑起来# 官网下载源码包 解压安装: tar zxvf redis-3.2.8.tar.gz 进入目录: cd redis-3.2.8/ 编译: make 编译完成后, 最重要的两个文件是: src目录里面的redis-server redis-cli两个文件, 把这个文件拷贝到PATH中即可运行. 简陋地运行一下: src/redis-server redis.conf 命令后指定配置文件即">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-12-03T14:50:31.084Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis安装与服务配置">
-<meta name="twitter:description" content="快速跑起来 官网下载源码包 解压安装: tar zxvf redis-3.2.8.tar.gz 进入目录: cd redis-3.2.8/ 编译: make 编译完成后, 最重要的两个文件是: src目录里面的redis-server redis-cli两个文件, 把这个文件拷贝到PATH中即可运行. 简陋地运行一下: src/redis-server redis.conf 命令后指定配置文件即可">
+<meta name="twitter:description" content="快速跑起来# 官网下载源码包 解压安装: tar zxvf redis-3.2.8.tar.gz 进入目录: cd redis-3.2.8/ 编译: make 编译完成后, 最重要的两个文件是: src目录里面的redis-server redis-cli两个文件, 把这个文件拷贝到PATH中即可运行. 简陋地运行一下: src/redis-server redis.conf 命令后指定配置文件即">
 
 
 
@@ -334,14 +334,14 @@
       
 
       
-        <h2 id="快速跑起来"><a href="#快速跑起来" class="headerlink" title="快速跑起来"></a>快速跑起来</h2><ol>
+        <h2><span id="kuai-su-pao-qi-lai">快速跑起来</span><a href="#kuai-su-pao-qi-lai" class="header-anchor">#</a></h2><ol>
 <li><a href="https://redis.io/download" target="_blank" rel="noopener">官网下载源码包</a></li>
 <li>解压安装: <code>tar zxvf redis-3.2.8.tar.gz</code></li>
 <li>进入目录: <code>cd redis-3.2.8/</code></li>
 <li>编译: <code>make</code><br> 编译完成后, 最重要的两个文件是: src目录里面的<code>redis-server redis-cli</code>两个文件, 把这个文件拷贝到PATH中即可运行.</li>
 <li>简陋地运行一下: <code>src/redis-server redis.conf</code> 命令后指定配置文件即可跑起来</li>
 </ol>
-<h2 id="更好的封装"><a href="#更好的封装" class="headerlink" title="更好的封装"></a>更好的封装</h2><p>参照Nginx的形式, 做了如下的处理:</p>
+<h2><span id="geng-hao-de-feng-zhuang">更好的封装</span><a href="#geng-hao-de-feng-zhuang" class="header-anchor">#</a></h2><p>参照Nginx的形式, 做了如下的处理:</p>
 <ol>
 <li>创建主目录: <code>sudo mkdir /usr/local/redis</code></li>
 <li>主目录内的目录结构:</li>
@@ -357,7 +357,7 @@
 </li>
 <li>注册为启动命令: <code>sudo chkconfig --add redis</code><br>检查是否成功: <code>chkconfig --list redis</code>, 如果返回类似<code>redis 0:off 1:off 2:on 3:on 4:on 5:on 6:off</code>的结果就说明成功了</li>
 </ol>
-<h2 id="PS-强制关闭进程"><a href="#PS-强制关闭进程" class="headerlink" title="PS: 强制关闭进程"></a>PS: 强制关闭进程</h2><p>遇到一个颇尴尬的问题: 启动后, 由于配置文件中没有指定<code>dir /usr/local/redis/</code>, 导致redis关闭的时候写文件时没有权限, 就不能完成关闭, 就怎么都不能关闭服务, 只能强制杀死进程:<code>sudo kill -9 &lt;pid&gt;</code></p>
+<h2><span id="ps-qiang-zhi-guan-bi-jin-cheng">PS: 强制关闭进程</span><a href="#ps-qiang-zhi-guan-bi-jin-cheng" class="header-anchor">#</a></h2><p>遇到一个颇尴尬的问题: 启动后, 由于配置文件中没有指定<code>dir /usr/local/redis/</code>, 导致redis关闭的时候写文件时没有权限, 就不能完成关闭, 就怎么都不能关闭服务, 只能强制杀死进程:<code>sudo kill -9 &lt;pid&gt;</code></p>
 
       
     </div>
@@ -544,7 +544,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#快速跑起来"><span class="nav-number">1.</span> <span class="nav-text">快速跑起来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更好的封装"><span class="nav-number">2.</span> <span class="nav-text">更好的封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PS-强制关闭进程"><span class="nav-number">3.</span> <span class="nav-text">PS: 强制关闭进程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">快速跑起来#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">更好的封装#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">PS: 强制关闭进程#</span></a></li></ol></div>
             
 
           </div>

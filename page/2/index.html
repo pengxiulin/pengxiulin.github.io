@@ -337,14 +337,14 @@
       
         
           
-            <h2 id="快速跑起来"><a href="#快速跑起来" class="headerlink" title="快速跑起来"></a>快速跑起来</h2><ol>
+            <h2><span id="kuai-su-pao-qi-lai">快速跑起来</span><a href="#kuai-su-pao-qi-lai" class="header-anchor">#</a></h2><ol>
 <li><a href="https://redis.io/download" target="_blank" rel="noopener">官网下载源码包</a></li>
 <li>解压安装: <code>tar zxvf redis-3.2.8.tar.gz</code></li>
 <li>进入目录: <code>cd redis-3.2.8/</code></li>
 <li>编译: <code>make</code><br> 编译完成后, 最重要的两个文件是: src目录里面的<code>redis-server redis-cli</code>两个文件, 把这个文件拷贝到PATH中即可运行.</li>
 <li>简陋地运行一下: <code>src/redis-server redis.conf</code> 命令后指定配置文件即可跑起来</li>
 </ol>
-<h2 id="更好的封装"><a href="#更好的封装" class="headerlink" title="更好的封装"></a>更好的封装</h2><p>参照Nginx的形式, 做了如下的处理:</p>
+<h2><span id="geng-hao-de-feng-zhuang">更好的封装</span><a href="#geng-hao-de-feng-zhuang" class="header-anchor">#</a></h2><p>参照Nginx的形式, 做了如下的处理:</p>
 <ol>
 <li>创建主目录: <code>sudo mkdir /usr/local/redis</code></li>
 <li>主目录内的目录结构:</li>
@@ -360,7 +360,7 @@
 </li>
 <li>注册为启动命令: <code>sudo chkconfig --add redis</code><br>检查是否成功: <code>chkconfig --list redis</code>, 如果返回类似<code>redis 0:off 1:off 2:on 3:on 4:on 5:on 6:off</code>的结果就说明成功了</li>
 </ol>
-<h2 id="PS-强制关闭进程"><a href="#PS-强制关闭进程" class="headerlink" title="PS: 强制关闭进程"></a>PS: 强制关闭进程</h2><p>遇到一个颇尴尬的问题: 启动后, 由于配置文件中没有指定<code>dir /usr/local/redis/</code>, 导致redis关闭的时候写文件时没有权限, 就不能完成关闭, 就怎么都不能关闭服务, 只能强制杀死进程:<code>sudo kill -9 &lt;pid&gt;</code></p>
+<h2><span id="ps-qiang-zhi-guan-bi-jin-cheng">PS: 强制关闭进程</span><a href="#ps-qiang-zhi-guan-bi-jin-cheng" class="header-anchor">#</a></h2><p>遇到一个颇尴尬的问题: 启动后, 由于配置文件中没有指定<code>dir /usr/local/redis/</code>, 导致redis关闭的时候写文件时没有权限, 就不能完成关闭, 就怎么都不能关闭服务, 只能强制杀死进程:<code>sudo kill -9 &lt;pid&gt;</code></p>
 
           
         
@@ -634,9 +634,9 @@
       
         
           
-            <h2 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h2><p>显示上调命令返回状态➜路径@时间</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">local</span> ret_status=<span class="string">"%(?:%&#123;<span class="variable">$fg_bold</span>[green]%&#125;➜ :%&#123;<span class="variable">$fg_bold</span>[red]%&#125;➜ )"</span></span><br><span class="line">PROMPT=<span class="string">'$&#123;ret_status&#125;%&#123;$fg[cyan]%&#125;%c%&#123;$reset_color%&#125;@%&#123;$fg[blue]%&#125;%`date "+\%H:%M"`%&#123;$reset_color%&#125;\$'</span></span><br></pre></td></tr></table></figure>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ol>
+            <h2><span id="shi-xian-xiao-guo">实现效果</span><a href="#shi-xian-xiao-guo" class="header-anchor">#</a></h2><p>显示上调命令返回状态➜路径@时间</p>
+<h2><span id="dai-ma">代码</span><a href="#dai-ma" class="header-anchor">#</a></h2><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">local</span> ret_status=<span class="string">"%(?:%&#123;<span class="variable">$fg_bold</span>[green]%&#125;➜ :%&#123;<span class="variable">$fg_bold</span>[red]%&#125;➜ )"</span></span><br><span class="line">PROMPT=<span class="string">'$&#123;ret_status&#125;%&#123;$fg[cyan]%&#125;%c%&#123;$reset_color%&#125;@%&#123;$fg[blue]%&#125;%`date "+\%H:%M"`%&#123;$reset_color%&#125;\$'</span></span><br></pre></td></tr></table></figure>
+<h2><span id="shuo-ming">说明</span><a href="#shuo-ming" class="header-anchor">#</a></h2><ol>
 <li>把git状态干掉了, 加上以后在大项目下面,会很卡,明显影响效率</li>
 <li>oh-my-zsh的prompt设置在theme里面(theme设置在<code>~/.zshrc</code>里面, 比如我的主题存放在<code>~/.oh-my-zsh/themes/robbyrussell.zsh-theme</code>)</li>
 <li>bash是$PS1,不过,上面的命令仅适用于zsh</li>
@@ -778,8 +778,8 @@
       
         
           
-            <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> path = <span class="string">'/Volumes/'</span>;</span><br><span class="line">fs.watch(path, <span class="function"><span class="keyword">function</span> (<span class="params">event, filename</span>) </span>&#123;</span><br><span class="line">    fs.exists(path+filename, <span class="function"><span class="keyword">function</span>(<span class="params">exist</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(exist)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"mount as:"</span>+filename);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"unmount:"</span>+filename);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>系统会mount设备到<code>/Volumes/</code>目录，创建一个新文件夹，所以，监听<code>/Volumes/</code>目录变动即可</p>
+            <h2><span id="dai-ma">代码</span><a href="#dai-ma" class="header-anchor">#</a></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> path = <span class="string">'/Volumes/'</span>;</span><br><span class="line">fs.watch(path, <span class="function"><span class="keyword">function</span> (<span class="params">event, filename</span>) </span>&#123;</span><br><span class="line">    fs.exists(path+filename, <span class="function"><span class="keyword">function</span>(<span class="params">exist</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(exist)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"mount as:"</span>+filename);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"unmount:"</span>+filename);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2><span id="yuan-li">原理</span><a href="#yuan-li" class="header-anchor">#</a></h2><p>系统会mount设备到<code>/Volumes/</code>目录，创建一个新文件夹，所以，监听<code>/Volumes/</code>目录变动即可</p>
 
           
         
@@ -916,8 +916,8 @@
       
         
           
-            <h2 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h2><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /System/Library/Frameworks</span><br></pre></td></tr></table></figure>
-<h2 id="OpenGL调用"><a href="#OpenGL调用" class="headerlink" title="OpenGL调用"></a>OpenGL调用</h2><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc source.c -framework GLUT -framework OpenGL</span><br></pre></td></tr></table></figure>
+            <h2><span id="wei-zhi">位置</span><a href="#wei-zhi" class="header-anchor">#</a></h2><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /System/Library/Frameworks</span><br></pre></td></tr></table></figure>
+<h2><span id="opengl-diao-yong">OpenGL调用</span><a href="#opengl-diao-yong" class="header-anchor">#</a></h2><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc source.c -framework GLUT -framework OpenGL</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1053,7 +1053,7 @@
       
         
           
-            <h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> ip=<span class="string">'ifconfig|grep "inet "|cut -d" " -f2'</span></span><br></pre></td></tr></table></figure>
+            <h2><span id="ming-ling">命令</span><a href="#ming-ling" class="header-anchor">#</a></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> ip=<span class="string">'ifconfig|grep "inet "|cut -d" " -f2'</span></span><br></pre></td></tr></table></figure>
           
         
       
@@ -1328,12 +1328,12 @@
         
           
             <p>需要使用osascript命令来搞</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">tell</span> <span class="built_in">application</span> <span class="string">"System Events"</span></span><br><span class="line">    <span class="keyword">tell</span> desktop <span class="number">1</span></span><br><span class="line">    <span class="keyword">set</span> picture <span class="keyword">to</span> <span class="string">"/Users/pxl/Pictures/earth.jpg"</span></span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">tell</span></span><br><span class="line">    <span class="keyword">tell</span> desktop <span class="number">2</span></span><br><span class="line">    <span class="keyword">set</span> picture <span class="keyword">to</span> <span class="string">"/Users/pxl/Pictures/wall.png"</span></span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">tell</span></span><br><span class="line"><span class="keyword">end</span> <span class="keyword">tell</span></span><br></pre></td></tr></table></figure>
-<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><ol>
+<h2><span id="dai-ma">代码</span><a href="#dai-ma" class="header-anchor">#</a></h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">tell</span> <span class="built_in">application</span> <span class="string">"System Events"</span></span><br><span class="line">    <span class="keyword">tell</span> desktop <span class="number">1</span></span><br><span class="line">    <span class="keyword">set</span> picture <span class="keyword">to</span> <span class="string">"/Users/pxl/Pictures/earth.jpg"</span></span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">tell</span></span><br><span class="line">    <span class="keyword">tell</span> desktop <span class="number">2</span></span><br><span class="line">    <span class="keyword">set</span> picture <span class="keyword">to</span> <span class="string">"/Users/pxl/Pictures/wall.png"</span></span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">tell</span></span><br><span class="line"><span class="keyword">end</span> <span class="keyword">tell</span></span><br></pre></td></tr></table></figure>
+<h2><span id="ru-he-shi-yong">如何使用</span><a href="#ru-he-shi-yong" class="header-anchor">#</a></h2><ol>
 <li>命令行直接输入osascript，然后粘贴上面的代码后，按Ctrl+D即可执行</li>
 <li>另外一种执行方式：保存为background.scpt, 然后执行命令<code>osascript background.scpt</code></li>
 </ol>
-<h2 id="更多关于osascript"><a href="#更多关于osascript" class="headerlink" title="更多关于osascript"></a>更多关于osascript</h2><ol>
+<h2><span id="geng-duo-guan-yu-osascript">更多关于osascript</span><a href="#geng-duo-guan-yu-osascript" class="header-anchor">#</a></h2><ol>
 <li><a href="https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/osascript.1.html" target="_blank" rel="noopener">帮助文档</a></li>
 <li><a href="https://developer.apple.com/library/content/documentation/AppleScript/Conceptual/AppleScriptLangGuide/introduction/ASLR_intro.html" target="_blank" rel="noopener">API</a></li>
 </ol>

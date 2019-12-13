@@ -73,17 +73,17 @@
 
 
 
-  <meta name="description" content="实现效果显示上调命令返回状态➜路径@时间 代码12local ret_status=&quot;%(?:%&amp;#123;$fg_bold[green]%&amp;#125;➜ :%&amp;#123;$fg_bold[red]%&amp;#125;➜ )&quot;PROMPT=&apos;$&amp;#123;ret_status&amp;#125;%&amp;#123;$fg[cyan]%&amp;#125;%c%&amp;#123;$reset_color%&amp;#125;@%&amp;#123;">
+  <meta name="description" content="实现效果#显示上调命令返回状态➜路径@时间 代码#12local ret_status=&quot;%(?:%&amp;#123;$fg_bold[green]%&amp;#125;➜ :%&amp;#123;$fg_bold[red]%&amp;#125;➜ )&quot;PROMPT=&apos;$&amp;#123;ret_status&amp;#125;%&amp;#123;$fg[cyan]%&amp;#125;%c%&amp;#123;$reset_color%&amp;#125;@%&amp;#12">
 <meta property="og:type" content="article">
 <meta property="og:title" content="My ZSH Prompt">
 <meta property="og:url" content="https://pengxiulin.com/2017/04/zsh-prompt/index.html">
 <meta property="og:site_name" content="XStack">
-<meta property="og:description" content="实现效果显示上调命令返回状态➜路径@时间 代码12local ret_status=&quot;%(?:%&amp;#123;$fg_bold[green]%&amp;#125;➜ :%&amp;#123;$fg_bold[red]%&amp;#125;➜ )&quot;PROMPT=&apos;$&amp;#123;ret_status&amp;#125;%&amp;#123;$fg[cyan]%&amp;#125;%c%&amp;#123;$reset_color%&amp;#125;@%&amp;#123;">
+<meta property="og:description" content="实现效果#显示上调命令返回状态➜路径@时间 代码#12local ret_status=&quot;%(?:%&amp;#123;$fg_bold[green]%&amp;#125;➜ :%&amp;#123;$fg_bold[red]%&amp;#125;➜ )&quot;PROMPT=&apos;$&amp;#123;ret_status&amp;#125;%&amp;#123;$fg[cyan]%&amp;#125;%c%&amp;#123;$reset_color%&amp;#125;@%&amp;#12">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-01-15T10:08:59.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="My ZSH Prompt">
-<meta name="twitter:description" content="实现效果显示上调命令返回状态➜路径@时间 代码12local ret_status=&quot;%(?:%&amp;#123;$fg_bold[green]%&amp;#125;➜ :%&amp;#123;$fg_bold[red]%&amp;#125;➜ )&quot;PROMPT=&apos;$&amp;#123;ret_status&amp;#125;%&amp;#123;$fg[cyan]%&amp;#125;%c%&amp;#123;$reset_color%&amp;#125;@%&amp;#123;">
+<meta name="twitter:description" content="实现效果#显示上调命令返回状态➜路径@时间 代码#12local ret_status=&quot;%(?:%&amp;#123;$fg_bold[green]%&amp;#125;➜ :%&amp;#123;$fg_bold[red]%&amp;#125;➜ )&quot;PROMPT=&apos;$&amp;#123;ret_status&amp;#125;%&amp;#123;$fg[cyan]%&amp;#125;%c%&amp;#123;$reset_color%&amp;#125;@%&amp;#12">
 
 
 
@@ -333,9 +333,9 @@
       
 
       
-        <h2 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h2><p>显示上调命令返回状态➜路径@时间</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">local</span> ret_status=<span class="string">"%(?:%&#123;<span class="variable">$fg_bold</span>[green]%&#125;➜ :%&#123;<span class="variable">$fg_bold</span>[red]%&#125;➜ )"</span></span><br><span class="line">PROMPT=<span class="string">'$&#123;ret_status&#125;%&#123;$fg[cyan]%&#125;%c%&#123;$reset_color%&#125;@%&#123;$fg[blue]%&#125;%`date "+\%H:%M"`%&#123;$reset_color%&#125;\$'</span></span><br></pre></td></tr></table></figure>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ol>
+        <h2><span id="shi-xian-xiao-guo">实现效果</span><a href="#shi-xian-xiao-guo" class="header-anchor">#</a></h2><p>显示上调命令返回状态➜路径@时间</p>
+<h2><span id="dai-ma">代码</span><a href="#dai-ma" class="header-anchor">#</a></h2><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">local</span> ret_status=<span class="string">"%(?:%&#123;<span class="variable">$fg_bold</span>[green]%&#125;➜ :%&#123;<span class="variable">$fg_bold</span>[red]%&#125;➜ )"</span></span><br><span class="line">PROMPT=<span class="string">'$&#123;ret_status&#125;%&#123;$fg[cyan]%&#125;%c%&#123;$reset_color%&#125;@%&#123;$fg[blue]%&#125;%`date "+\%H:%M"`%&#123;$reset_color%&#125;\$'</span></span><br></pre></td></tr></table></figure>
+<h2><span id="shuo-ming">说明</span><a href="#shuo-ming" class="header-anchor">#</a></h2><ol>
 <li>把git状态干掉了, 加上以后在大项目下面,会很卡,明显影响效率</li>
 <li>oh-my-zsh的prompt设置在theme里面(theme设置在<code>~/.zshrc</code>里面, 比如我的主题存放在<code>~/.oh-my-zsh/themes/robbyrussell.zsh-theme</code>)</li>
 <li>bash是$PS1,不过,上面的命令仅适用于zsh</li>
@@ -521,7 +521,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现效果"><span class="nav-number">1.</span> <span class="nav-text">实现效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">3.</span> <span class="nav-text">说明</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">实现效果#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">代码#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">说明#</span></a></li></ol></div>
             
 
           </div>

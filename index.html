@@ -343,15 +343,15 @@
 <li><a href="#参考文档">参考文档</a></li>
 <li><a href="#更多资料">更多资料</a></li>
 </ul>
-<h2 id="使用skpm快速生成"><a href="#使用skpm快速生成" class="headerlink" title="使用skpm快速生成"></a>使用skpm快速生成</h2><p>skpm是sketch官方出的快速生成插件的工具，目前已经越来越成熟了</p>
+<h2><span id="shi-yong-skpm-kuai-su-sheng-cheng">使用skpm快速生成</span><a href="#shi-yong-skpm-kuai-su-sheng-cheng" class="header-anchor">#</a></h2><p>skpm是sketch官方出的快速生成插件的工具，目前已经越来越成熟了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ nmp install -g skpm</span><br><span class="line">$ skpm create first-plugin</span><br><span class="line">✔ Done!</span><br><span class="line"></span><br><span class="line">The Sketch developer mode is not enabled (http://developer.sketchapp.com/introduction/preferences/<span class="comment">#always-reload-scripts-before-running).</span></span><br><span class="line">Do you want to <span class="built_in">enable</span> it? (y/N) y</span><br><span class="line">success Sketch developer mode enabled</span><br><span class="line"></span><br><span class="line">To get started, <span class="built_in">cd</span> into the new directory:</span><br><span class="line">  <span class="built_in">cd</span> first-plugin</span><br><span class="line"></span><br><span class="line">To start a development live-reload build:</span><br><span class="line">  npm run start</span><br><span class="line"></span><br><span class="line">To build the plugin:</span><br><span class="line">  npm run build</span><br><span class="line"></span><br><span class="line">To publish the plugin:</span><br><span class="line">  skpm publish</span><br><span class="line">$ <span class="built_in">cd</span> first-plugin</span><br></pre></td></tr></table></figure>
 <p>如果你在刚才的提问环节选择了y，那么，打开sketch就可以看到一个菜单，点击一下，就可以输出了</p>
 <p>默认生成的这个代码很简单，只有一个弹出提示：<code>It&#39;s alive 🙌</code></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>更多的文件修改和配置可以<a href="https://developer.sketch.com/plugins/create-a-plugin#2-manual" target="_blank" rel="noopener">看这里</a></p>
+<h2><span id="can-kao-wen-dang">参考文档</span><a href="#can-kao-wen-dang" class="header-anchor">#</a></h2><p>更多的文件修改和配置可以<a href="https://developer.sketch.com/plugins/create-a-plugin#2-manual" target="_blank" rel="noopener">看这里</a></p>
 <blockquote>
 <p>PS：语法支持ES6</p>
 </blockquote>
-<h2 id="更多资料"><a href="#更多资料" class="headerlink" title="更多资料"></a>更多资料</h2><p><a href="https://developer.sketch.com/reference/api/" target="_blank" rel="noopener">所有JSAPI的列表</a></p>
+<h2><span id="geng-duo-zi-liao">更多资料</span><a href="#geng-duo-zi-liao" class="header-anchor">#</a></h2><p><a href="https://developer.sketch.com/reference/api/" target="_blank" rel="noopener">所有JSAPI的列表</a></p>
 
           
         
@@ -490,20 +490,34 @@
           
             <p>直播火了好几年了，当然要了解下原理。</p>
 <p>周末使用RTMP做了几个简单实验，记录如下：</p>
+<div class="toc">
+
+<!-- toc -->
 <ul>
-<li>推送一个本地文件</li>
-<li>录制本地屏幕推送到远程</li>
+<li><a href="#huo-qu-suo-you-ke-yi-lu-zhi-de-shi-pin-yuan">获取所有可以录制的视频源</a></li>
+<li><a href="#tui-liu-yi-ge-ben-di-wen-jian">推流一个本地文件</a></li>
+<li><a href="#lu-zhi-ping-mu">录制屏幕</a></li>
+<li><a href="#bo-fang-shi-pin">播放视频</a></li>
+<li><a href="#lu-zhi-ping-mu-bing-tui-liu">录制屏幕并推流</a></li>
+<li><a href="#fu-nginx-shang-an-zhuang-rtmp-fu-wu-qi">附：Nginx上安装rtmp服务器</a><ul>
+<li><a href="#xia-zai-yuan-ma-bian-yi-yu-an-zhuang">下载源码、编译与安装</a></li>
+<li><a href="#pei-zhi">配置</a></li>
 </ul>
-<h2 id="获取所有可以录制的视频源"><a href="#获取所有可以录制的视频源" class="headerlink" title="获取所有可以录制的视频源"></a>获取所有可以录制的视频源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -devices</span><br><span class="line">$ ffmpeg -f avfoundation -list_devices <span class="literal">true</span> -i <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># outputs like:</span></span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] AVFoundation video devices:</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] [0] FaceTime HD Camera</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] [1] Capture screen 0</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] AVFoundation audio devices:</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] [0] Built-in Microphone</span><br></pre></td></tr></table></figure>
-<h2 id="推流一个本地文件"><a href="#推流一个本地文件" class="headerlink" title="推流一个本地文件"></a>推流一个本地文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -re -stream_loop -1 -i out.mp4 -vcodec libx264 -acodec aac -f flv rtmp://xxxx.com:1935/hls/<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-<h2 id="录制屏幕"><a href="#录制屏幕" class="headerlink" title="录制屏幕"></a>录制屏幕</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -f avfoundation -i <span class="string">"Capture screen 0"</span> -r:v 30</span><br></pre></td></tr></table></figure>
-<h2 id="播放视频"><a href="#播放视频" class="headerlink" title="播放视频"></a>播放视频</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffplay https://xxxx.com/hls/test.m3u8</span><br></pre></td></tr></table></figure>
-<h2 id="录制屏幕并推流"><a href="#录制屏幕并推流" class="headerlink" title="录制屏幕并推流"></a>录制屏幕并推流</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -f avfoundation -i <span class="string">"Capture screen 0"</span> -r:v 30 -vcodec libx264 -acodec aac -f flv rtmp://xxxx.com:1935/hls/<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-<h2 id="附：Nginx上安装rtmp服务器"><a href="#附：Nginx上安装rtmp服务器" class="headerlink" title="附：Nginx上安装rtmp服务器"></a>附：Nginx上安装rtmp服务器</h2><h3 id="下载源码、编译与安装"><a href="#下载源码、编译与安装" class="headerlink" title="下载源码、编译与安装"></a>下载源码、编译与安装</h3><p>从下面两个地址找到源码包<br><a href="https://nginx.org/en/download.html" target="_blank" rel="noopener">最新的Nginx源代码</a><br><a href="https://www.openssl.org/source/" target="_blank" rel="noopener">openssl最新源码地址</a><br>然后，解压缩到<code>~/softs/</code>目录下，再下载一份nginx-rtmp-module到<code>~/softs/</code>目录，然后三个包一起编译、安装：</p>
+</li>
+</ul>
+<!-- tocstop -->
+</div>
+
+<h2><span id="huo-qu-suo-you-ke-yi-lu-zhi-de-shi-pin-yuan">获取所有可以录制的视频源</span><a href="#huo-qu-suo-you-ke-yi-lu-zhi-de-shi-pin-yuan" class="header-anchor">#</a></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -devices</span><br><span class="line">$ ffmpeg -f avfoundation -list_devices <span class="literal">true</span> -i <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># outputs like:</span></span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] AVFoundation video devices:</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] [0] FaceTime HD Camera</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] [1] Capture screen 0</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] AVFoundation audio devices:</span><br><span class="line">[AVFoundation input device @ 0x7ff7d0504640] [0] Built-in Microphone</span><br></pre></td></tr></table></figure>
+<h2><span id="tui-liu-yi-ge-ben-di-wen-jian">推流一个本地文件</span><a href="#tui-liu-yi-ge-ben-di-wen-jian" class="header-anchor">#</a></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -re -stream_loop -1 -i out.mp4 -vcodec libx264 -acodec aac -f flv rtmp://xxxx.com:1935/hls/<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<h2><span id="lu-zhi-ping-mu">录制屏幕</span><a href="#lu-zhi-ping-mu" class="header-anchor">#</a></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -f avfoundation -i <span class="string">"Capture screen 0"</span> -r:v 30</span><br></pre></td></tr></table></figure>
+<h2><span id="bo-fang-shi-pin">播放视频</span><a href="#bo-fang-shi-pin" class="header-anchor">#</a></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffplay https://xxxx.com/hls/test.m3u8</span><br></pre></td></tr></table></figure>
+<h2><span id="lu-zhi-ping-mu-bing-tui-liu">录制屏幕并推流</span><a href="#lu-zhi-ping-mu-bing-tui-liu" class="header-anchor">#</a></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -f avfoundation -i <span class="string">"Capture screen 0"</span> -r:v 30 -vcodec libx264 -acodec aac -f flv rtmp://xxxx.com:1935/hls/<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<h2><span id="fu-nginx-shang-an-zhuang-rtmp-fu-wu-qi">附：Nginx上安装rtmp服务器</span><a href="#fu-nginx-shang-an-zhuang-rtmp-fu-wu-qi" class="header-anchor">#</a></h2><h3><span id="xia-zai-yuan-ma-bian-yi-yu-an-zhuang">下载源码、编译与安装</span><a href="#xia-zai-yuan-ma-bian-yi-yu-an-zhuang" class="header-anchor">#</a></h3><p>从下面两个地址找到源码包<br><a href="https://nginx.org/en/download.html" target="_blank" rel="noopener">最新的Nginx源代码</a><br><a href="https://www.openssl.org/source/" target="_blank" rel="noopener">openssl最新源码地址</a><br>然后，解压缩到<code>~/softs/</code>目录下，再下载一份nginx-rtmp-module到<code>~/softs/</code>目录，然后三个包一起编译、安装：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/softs/ <span class="comment">#没有可以自己创建，或者其它临时目录也可以</span></span><br><span class="line">$ wget https://nginx.org/download/nginx-1.17.6.tar.gz</span><br><span class="line">$ tar zxvf nginx-1.17.6.tar.gz</span><br><span class="line">$ wget https://www.openssl.org/<span class="built_in">source</span>/openssl-1.1.1d.tar.gz</span><br><span class="line">$ tar zxvf openssl-1.1.1d.tar.gz</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/arut/nginx-rtmp-module</span><br><span class="line">$ <span class="built_in">cd</span> nginx-1.17.6/</span><br><span class="line">$ ./configure --prefix=/usr/<span class="built_in">local</span>/nginx --with-http_v2_module --with-http_ssl_module --with-openssl=../openssl-1.1.1d --add-module=../nginx-rtmp-module</span><br><span class="line">$ make</span><br><span class="line">$ make install <span class="comment">#按需决定是否需要sudo</span></span><br></pre></td></tr></table></figure>
 <p>安装完毕后，执行命令测试是否安装成功：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /usr/<span class="built_in">local</span>/nginx</span><br></pre></td></tr></table></figure></p>
 <p>然后通过浏览器访问80端口: <code>http://localhost/</code><br>如果看到Nginx欢迎页，说明安装成功，就可以继续配置环节了。</p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将下面这个段落配置到http平级的位置</span></span><br><span class="line">rtmp &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen 1935;</span><br><span class="line">        application live &#123;</span><br><span class="line">            live on;</span><br><span class="line">        &#125;</span><br><span class="line">        application hls &#123;</span><br><span class="line">            live on;</span><br><span class="line">            hls on;</span><br><span class="line">            hls_path /tmp/hls;</span><br><span class="line">        &#125;</span><br><span class="line">        application vod &#123;</span><br><span class="line">            play /tmp/video;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># server中添加一个目录，并配置mimetype</span></span><br><span class="line">location /hls &#123;</span><br><span class="line">    types &#123;</span><br><span class="line">        application/vnd.apple.mpegurl m3u8;</span><br><span class="line">        video/mp2t ts;</span><br><span class="line">    &#125;</span><br><span class="line">    root /tmp;</span><br><span class="line">    add_header Cache-Control no-cache;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="pei-zhi">配置</span><a href="#pei-zhi" class="header-anchor">#</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将下面这个段落配置到http平级的位置</span></span><br><span class="line">rtmp &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen 1935;</span><br><span class="line">        application live &#123;</span><br><span class="line">            live on;</span><br><span class="line">        &#125;</span><br><span class="line">        application hls &#123;</span><br><span class="line">            live on;</span><br><span class="line">            hls on;</span><br><span class="line">            hls_path /tmp/hls;</span><br><span class="line">        &#125;</span><br><span class="line">        application vod &#123;</span><br><span class="line">            play /tmp/video;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># server中添加一个目录，并配置mimetype</span></span><br><span class="line">location /hls &#123;</span><br><span class="line">    types &#123;</span><br><span class="line">        application/vnd.apple.mpegurl m3u8;</span><br><span class="line">        video/mp2t ts;</span><br><span class="line">    &#125;</span><br><span class="line">    root /tmp;</span><br><span class="line">    add_header Cache-Control no-cache;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>配置完成后重启就可以接收推流了</p>
 
           
@@ -641,21 +655,21 @@
       
         
           
-            <h2 id="Hexo中增加PlantUML"><a href="#Hexo中增加PlantUML" class="headerlink" title="Hexo中增加PlantUML"></a>Hexo中增加PlantUML</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-tag-plantuml --save</span><br></pre></td></tr></table></figure>
-<h2 id="活动图Demo"><a href="#活动图Demo" class="headerlink" title="活动图Demo"></a>活动图Demo</h2><img src="//www.plantuml.com/plantuml/svg/Aov9B2hXidhPsljyxpglnBB4vtthdovgjkQoUhAZ-yNUlGM9UIMbkJbwMOb5GB7dUwOzRPlvhB__nVuDpwQrFzcz3IZuh7FvYuKzrbp59Va50000">
-<h2 id="时序图Demo"><a href="#时序图Demo" class="headerlink" title="时序图Demo"></a>时序图Demo</h2><img src="//www.plantuml.com/plantuml/svg/Syp9J4vLqBLJSCfFib9mB2t9ICqhoKnEBCdCprC8IYqiJIqkuGBAAUW2rJY256DHLLoGdrUSoiNbY6fONZvGNP52OaafDaCXYcrqTT5KOpSS0000">
-<h2 id="用例图Demo"><a href="#用例图Demo" class="headerlink" title="用例图Demo"></a>用例图Demo</h2><img src="//www.plantuml.com/plantuml/svg/NL2x3i8m4Dlp5HPJEz2XOmS47m0BiB4SxK63qakL1CJdaqS54bAK-6oVaylM1tBXEHdLxKaBTiEafGFvWbHrzemmCcYUZUufQ2jrafDGAnLtX_K6rJ7br4kTYABdb4Zy6B61uVHz3B2tSWiwd4Rj4HS9-4tJRBZvjvR-7JBRHoCPRzMLOGMUN-p8m6XXhrY6x5eILZaymtZsLeJxmCD5WlqsskiZahvPfTaEhLhcGTEawj0cK1wmZUdnlpu0">
-<h2 id="类图Demo"><a href="#类图Demo" class="headerlink" title="类图Demo"></a>类图Demo</h2><img src="//www.plantuml.com/plantuml/svg/SoWkIImgAStDuNBEIImkDZ1KiAdHrLM0S8oWWiOAMd0n4wYOgK8-NCmCAcQkeAS75RA02bagm5GP6d0vfEQb0Aq20000">
-<h2 id="活动图Demo-1"><a href="#活动图Demo-1" class="headerlink" title="活动图Demo"></a>活动图Demo</h2><img src="//www.plantuml.com/plantuml/svg/qz3ILD0jBT2rKr1ooomgBb5mJ2x9BCiigLJYqYtAJCye0Sa4foRdvwKWIu54Gp8oYr04SrBJGCerj3G1">
-<h2 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h2><img src="//www.plantuml.com/plantuml/svg/dP4_2y8m4CNtV8gRXO9_S76GWZYu537W8WwXETj8ca2RjeFqktkf1b9rCajox_tU7KdInedQjPLcJIuqmcezXrv9LxBBx0f9ieNCEbvQwvGf62FQOIp1Wm44z20rKkctiTvPSrD5Mtjk0_lkLHCH6o4O4qEO58Fnf0pxiz0jSjIOEsKDUL_QX3pMs2dinob1YqB1_jby4ZhXdLIKVuMvw2X9qVT3VZJmLwJ5lRa0wZQUbgJIYmmiHIFfgvu0">
-<h2 id="Docker中快速安装PlantUML"><a href="#Docker中快速安装PlantUML" class="headerlink" title="Docker中快速安装PlantUML"></a>Docker中快速安装PlantUML</h2><ol>
+            <h2><span id="hexo-zhong-zeng-jia-plantuml">Hexo中增加PlantUML</span><a href="#hexo-zhong-zeng-jia-plantuml" class="header-anchor">#</a></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-tag-plantuml --save</span><br></pre></td></tr></table></figure>
+<h2><span id="huo-dong-tu-demo">活动图Demo</span><a href="#huo-dong-tu-demo" class="header-anchor">#</a></h2><img src="//www.plantuml.com/plantuml/svg/Aov9B2hXidhPsljyxpglnBB4vtthdovgjkQoUhAZ-yNUlGM9UIMbkJbwMOb5GB7dUwOzRPlvhB__nVuDpwQrFzcz3IZuh7FvYuKzrbp59Va50000">
+<h2><span id="shi-xu-tu-demo">时序图Demo</span><a href="#shi-xu-tu-demo" class="header-anchor">#</a></h2><img src="//www.plantuml.com/plantuml/svg/Syp9J4vLqBLJSCfFib9mB2t9ICqhoKnEBCdCprC8IYqiJIqkuGBAAUW2rJY256DHLLoGdrUSoiNbY6fONZvGNP52OaafDaCXYcrqTT5KOpSS0000">
+<h2><span id="yong-li-tu-demo">用例图Demo</span><a href="#yong-li-tu-demo" class="header-anchor">#</a></h2><img src="//www.plantuml.com/plantuml/svg/NL2x3i8m4Dlp5HPJEz2XOmS47m0BiB4SxK63qakL1CJdaqS54bAK-6oVaylM1tBXEHdLxKaBTiEafGFvWbHrzemmCcYUZUufQ2jrafDGAnLtX_K6rJ7br4kTYABdb4Zy6B61uVHz3B2tSWiwd4Rj4HS9-4tJRBZvjvR-7JBRHoCPRzMLOGMUN-p8m6XXhrY6x5eILZaymtZsLeJxmCD5WlqsskiZahvPfTaEhLhcGTEawj0cK1wmZUdnlpu0">
+<h2><span id="lei-tu-demo">类图Demo</span><a href="#lei-tu-demo" class="header-anchor">#</a></h2><img src="//www.plantuml.com/plantuml/svg/SoWkIImgAStDuNBEIImkDZ1KiAdHrLM0S8oWWiOAMd0n4wYOgK8-NCmCAcQkeAS75RA02bagm5GP6d0vfEQb0Aq20000">
+<h2><span id="huo-dong-tu-demo">活动图Demo</span><a href="#huo-dong-tu-demo" class="header-anchor">#</a></h2><img src="//www.plantuml.com/plantuml/svg/qz3ILD0jBT2rKr1ooomgBb5mJ2x9BCiigLJYqYtAJCye0Sa4foRdvwKWIu54Gp8oYr04SrBJGCerj3G1">
+<h2><span id="zhuang-tai-tu">状态图</span><a href="#zhuang-tai-tu" class="header-anchor">#</a></h2><img src="//www.plantuml.com/plantuml/svg/dP4_2y8m4CNtV8gRXO9_S76GWZYu537W8WwXETj8ca2RjeFqktkf1b9rCajox_tU7KdInedQjPLcJIuqmcezXrv9LxBBx0f9ieNCEbvQwvGf62FQOIp1Wm44z20rKkctiTvPSrD5Mtjk0_lkLHCH6o4O4qEO58Fnf0pxiz0jSjIOEsKDUL_QX3pMs2dinob1YqB1_jby4ZhXdLIKVuMvw2X9qVT3VZJmLwJ5lRa0wZQUbgJIYmmiHIFfgvu0">
+<h2><span id="docker-zhong-kuai-su-an-zhuang-plantuml">Docker中快速安装PlantUML</span><a href="#docker-zhong-kuai-su-an-zhuang-plantuml" class="header-anchor">#</a></h2><ol>
 <li><p>使用下面的命令运行镜像</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 8081:8080 plantuml/plantuml-server:tomcat</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>访问 <a href="http://localhost:8081/plantuml" target="_blank" rel="noopener">http://localhost:8081/plantuml</a></p>
 </li>
 </ol>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://blog.csdn.net/geduo_83/article/details/86422485" target="_blank" rel="noopener">PlantUML画类图、流程图、时序图使用详解</a><br><a href="https://nipgeihou.com/Hexo/hexo_uml/" target="_blank" rel="noopener">【Hexo】使用PlantUML插件画UML图</a><br><a href="https://github.com/xuanye/plantuml-style-c4" target="_blank" rel="noopener">更复杂的UML图</a></p>
+<h2><span id="can-kao-zi-liao">参考资料</span><a href="#can-kao-zi-liao" class="header-anchor">#</a></h2><p><a href="https://blog.csdn.net/geduo_83/article/details/86422485" target="_blank" rel="noopener">PlantUML画类图、流程图、时序图使用详解</a><br><a href="https://nipgeihou.com/Hexo/hexo_uml/" target="_blank" rel="noopener">【Hexo】使用PlantUML插件画UML图</a><br><a href="https://github.com/xuanye/plantuml-style-c4" target="_blank" rel="noopener">更复杂的UML图</a></p>
 
           
         
@@ -852,143 +866,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pengxiulin.com/2017/06/e-papers/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xiulin">
-      <meta itemprop="description" content="foo bar">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XStack">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/06/e-papers/" class="post-title-link" itemprop="url">墨水屏开发板相关购买链接记录</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span>发布时间:</span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-06-02 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-02T00:00:00+08:00">2017-06-02</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://www.pi-supply.com/product/epaper-displays/" target="_blank" rel="noopener">Pi-Supply(树莓派专属配件, 英国royal mail国内转EMS)</a><br><a href="http://shopkits.eink.com/product/ice-with-7-8%CB%9D-epd-display-ed078kc1/" target="_blank" rel="noopener">7.8寸16级灰阶墨水屏(带驱动电路) ￥3054.77</a> kindle供应商, 有大尺寸的, 有带第三种颜色的<br><a href="http://www.pervasivedisplays.com/kits" target="_blank" rel="noopener">台湾墨水屏生产商 pervasive Displays</a>, 可以在digi-key平台购买<br><a href="http://www.digikey.com.cn/search/zh?lang=zh&amp;site=cn&amp;keywords=ST044AS182-ND" target="_blank" rel="noopener">4.41吋-￥514.62</a><br><a href="http://www.digikey.com.cn/search/zh/SW074AS182/SW074AS182-ND?recordId=4898789" target="_blank" rel="noopener">7.4吋墨水屏 - ￥955</a><br><a href="http://www.digikey.com.cn/search/zh/PISUPPLY-001/1778-1052-ND?recordId=6928265" target="_blank" rel="noopener">2寸长电子书开发套件 - ￥312</a><br><a href="https://item.taobao.com/item.htm?id=41985764351" target="_blank" rel="noopener">淘宝:大连佳显SPI2.9墨水屏 - ￥72</a><br><a href="https://detail.tmall.com/item.htm?id=550915068539" target="_blank" rel="noopener">淘宝:树莓派墨水屏2寸方屏幕 - ￥360</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://pengxiulin.com/2017/06/ip2num/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1129,6 +1006,143 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pengxiulin.com/2017/06/e-papers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiulin">
+      <meta itemprop="description" content="foo bar">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XStack">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/06/e-papers/" class="post-title-link" itemprop="url">墨水屏开发板相关购买链接记录</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span>发布时间:</span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-06-02 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-02T00:00:00+08:00">2017-06-02</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://www.pi-supply.com/product/epaper-displays/" target="_blank" rel="noopener">Pi-Supply(树莓派专属配件, 英国royal mail国内转EMS)</a><br><a href="http://shopkits.eink.com/product/ice-with-7-8%CB%9D-epd-display-ed078kc1/" target="_blank" rel="noopener">7.8寸16级灰阶墨水屏(带驱动电路) ￥3054.77</a> kindle供应商, 有大尺寸的, 有带第三种颜色的<br><a href="http://www.pervasivedisplays.com/kits" target="_blank" rel="noopener">台湾墨水屏生产商 pervasive Displays</a>, 可以在digi-key平台购买<br><a href="http://www.digikey.com.cn/search/zh?lang=zh&amp;site=cn&amp;keywords=ST044AS182-ND" target="_blank" rel="noopener">4.41吋-￥514.62</a><br><a href="http://www.digikey.com.cn/search/zh/SW074AS182/SW074AS182-ND?recordId=4898789" target="_blank" rel="noopener">7.4吋墨水屏 - ￥955</a><br><a href="http://www.digikey.com.cn/search/zh/PISUPPLY-001/1778-1052-ND?recordId=6928265" target="_blank" rel="noopener">2寸长电子书开发套件 - ￥312</a><br><a href="https://item.taobao.com/item.htm?id=41985764351" target="_blank" rel="noopener">淘宝:大连佳显SPI2.9墨水屏 - ￥72</a><br><a href="https://detail.tmall.com/item.htm?id=550915068539" target="_blank" rel="noopener">淘宝:树莓派墨水屏2寸方屏幕 - ￥360</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://pengxiulin.com/2017/06/macos-env/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1209,10 +1223,10 @@
       
         
           
-            <h2 id="常用的系统设置"><a href="#常用的系统设置" class="headerlink" title="常用的系统设置"></a>常用的系统设置</h2><p>设置三指拖拽窗口<br>Mail配置</p>
-<h2 id="一般软件安装"><a href="#一般软件安装" class="headerlink" title="一般软件安装"></a>一般软件安装</h2><p><a href="http://pinyin.sogou.com/mac/" target="_blank" rel="noopener">输入法</a><br><a href="http://www.google.cn/chrome/browser/desktop/index.html" target="_blank" rel="noopener">Chrome</a><br><a href="https://itunes.apple.com/cn/app/wechat/id836500024?mt=12" target="_blank" rel="noopener">微信</a><br><a href="https://itunes.apple.com/cn/app/ulysses/id1225570693?mt=12" target="_blank" rel="noopener">Ulysses</a><br><a href="http://music.163.com/#/download" target="_blank" rel="noopener">网易云音乐</a></p>
-<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p><a href="https://www.iterm2.com/downloads.html" target="_blank" rel="noopener">iTerm</a> 及<a href="http://iterm2colorschemes.com/" target="_blank" rel="noopener">主题包</a><br><a href="https://www.sourcetreeapp.com/" target="_blank" rel="noopener">SourceTree</a><br><a href="https://docs.docker.com/docker-for-mac/install/#download-docker-for-mac" target="_blank" rel="noopener">Docker</a><br><a href="https://atom.io/" target="_blank" rel="noopener">Atom</a><br><a href="https://nodejs.org/" target="_blank" rel="noopener">Node</a>(supervisor/pm2)<br><a href="https://brew.sh/" target="_blank" rel="noopener">brew</a><br>安装git<br><a href="https://itunes.apple.com/cn/app/xcode/id497799835?l=en&amp;mt=12" target="_blank" rel="noopener">Xcode</a><br><a href="http://ohmyz.sh/" target="_blank" rel="noopener">oh-my-zsh</a><br><a href="http://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html" target="_blank" rel="noopener">微信开发者工具</a></p>
-<h2 id="创建工作目录及开发环境搭建"><a href="#创建工作目录及开发环境搭建" class="headerlink" title="创建工作目录及开发环境搭建"></a>创建工作目录及开发环境搭建</h2><p><code>mkdir ~/work ~/code</code><br><a href="https://gitlab.luojilab.com/help/ssh/README" target="_blank" rel="noopener">生成SSH Key</a>、<a href="https://gitlab.luojilab.com/profile/keys" target="_blank" rel="noopener">添加到gitlab中</a></p>
+            <h2><span id="chang-yong-de-xi-tong-she-zhi">常用的系统设置</span><a href="#chang-yong-de-xi-tong-she-zhi" class="header-anchor">#</a></h2><p>设置三指拖拽窗口<br>Mail配置</p>
+<h2><span id="yi-ban-ruan-jian-an-zhuang">一般软件安装</span><a href="#yi-ban-ruan-jian-an-zhuang" class="header-anchor">#</a></h2><p><a href="http://pinyin.sogou.com/mac/" target="_blank" rel="noopener">输入法</a><br><a href="http://www.google.cn/chrome/browser/desktop/index.html" target="_blank" rel="noopener">Chrome</a><br><a href="https://itunes.apple.com/cn/app/wechat/id836500024?mt=12" target="_blank" rel="noopener">微信</a><br><a href="https://itunes.apple.com/cn/app/ulysses/id1225570693?mt=12" target="_blank" rel="noopener">Ulysses</a><br><a href="http://music.163.com/#/download" target="_blank" rel="noopener">网易云音乐</a></p>
+<h2><span id="kai-fa-huan-jing">开发环境</span><a href="#kai-fa-huan-jing" class="header-anchor">#</a></h2><p><a href="https://www.iterm2.com/downloads.html" target="_blank" rel="noopener">iTerm</a> 及<a href="http://iterm2colorschemes.com/" target="_blank" rel="noopener">主题包</a><br><a href="https://www.sourcetreeapp.com/" target="_blank" rel="noopener">SourceTree</a><br><a href="https://docs.docker.com/docker-for-mac/install/#download-docker-for-mac" target="_blank" rel="noopener">Docker</a><br><a href="https://atom.io/" target="_blank" rel="noopener">Atom</a><br><a href="https://nodejs.org/" target="_blank" rel="noopener">Node</a>(supervisor/pm2)<br><a href="https://brew.sh/" target="_blank" rel="noopener">brew</a><br>安装git<br><a href="https://itunes.apple.com/cn/app/xcode/id497799835?l=en&amp;mt=12" target="_blank" rel="noopener">Xcode</a><br><a href="http://ohmyz.sh/" target="_blank" rel="noopener">oh-my-zsh</a><br><a href="http://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html" target="_blank" rel="noopener">微信开发者工具</a></p>
+<h2><span id="chuang-jian-gong-zuo-mu-lu-ji-kai-fa-huan-jing-da-jian">创建工作目录及开发环境搭建</span><a href="#chuang-jian-gong-zuo-mu-lu-ji-kai-fa-huan-jing-da-jian" class="header-anchor">#</a></h2><p><code>mkdir ~/work ~/code</code><br><a href="https://gitlab.luojilab.com/help/ssh/README" target="_blank" rel="noopener">生成SSH Key</a>、<a href="https://gitlab.luojilab.com/profile/keys" target="_blank" rel="noopener">添加到gitlab中</a></p>
 
           
         
@@ -1349,7 +1363,7 @@
       
         
           
-            <h2 id="为什么要用input-type-range-而不是div-touch事件模拟"><a href="#为什么要用input-type-range-而不是div-touch事件模拟" class="headerlink" title="为什么要用input[type=range], 而不是div+touch事件模拟?"></a>为什么要用<code>input[type=range]</code>, 而不是div+touch事件模拟?</h2><ul>
+            <h2><span id="wei-shi-me-yao-yong-input-type-range-er-bu-shi-div-touch-shi-jian-mo-ni">为什么要用<code>input[type=range]</code>, 而不是div+touch事件模拟?</span><a href="#wei-shi-me-yao-yong-input-type-range-er-bu-shi-div-touch-shi-jian-mo-ni" class="header-anchor">#</a></h2><ul>
 <li>性能考量(拖拽的性能要比模拟的好一些)</li>
 <li>工作量考虑(改改样式就好了)</li>
 </ul>
@@ -1640,17 +1654,17 @@
       
         
           
-            <h2 id="日志的区分与汇总方式-一次事务采用独特标记与事务内异步事务的附加标记方式-说明如下"><a href="#日志的区分与汇总方式-一次事务采用独特标记与事务内异步事务的附加标记方式-说明如下" class="headerlink" title="日志的区分与汇总方式: 一次事务采用独特标记与事务内异步事务的附加标记方式, 说明如下:"></a>日志的区分与汇总方式: 一次事务采用独特标记与事务内异步事务的附加标记方式, 说明如下:</h2><ol>
+            <h2><span id="ri-zhi-de-qu-fen-yu-hui-zong-fang-shi-yi-ci-shi-wu-cai-yong-du-te-biao-ji-yu-shi-wu-nei-yi-bu-shi-wu-de-fu-jia-biao-ji-fang-shi-shuo-ming-ru-xia">日志的区分与汇总方式: 一次事务采用独特标记与事务内异步事务的附加标记方式, 说明如下:</span><a href="#ri-zhi-de-qu-fen-yu-hui-zong-fang-shi-yi-ci-shi-wu-cai-yong-du-te-biao-ji-yu-shi-wu-nei-yi-bu-shi-wu-de-fu-jia-biao-ji-fang-shi-shuo-ming-ru-xia" class="header-anchor">#</a></h2><ol>
 <li>为每次HTTP事务分配一个id, 本次事务内全部日志都输出该标记, 方便查找时以此为唯一索引, 可以查找这次请求过程中所有相关输出</li>
 <li>单次事务中, 所有对外部依赖的操作(包括接口请求,Redis操作,MongoDB操作等)均加独特id标记, 并附加到请求的id后, 构成形如: <code>&lt;user-request-id&gt;:&lt;redis-request-id&gt;</code>的形式, 内部再有细节划分则追加到后面, 以冒号分隔(其它分隔符也可以, 主要是为了更好的使用阿里云日志的搜索功能)<br>id生成算法:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 10(或11)位的短字符串</span><br><span class="line">Math.random().toString(36).substr(2)</span><br><span class="line"></span><br><span class="line">// 唯一程度更高的19(或18)位字符串</span><br><span class="line">Math.random().toString(36).substr(2)+new Date().getTime().toString(36)</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="长内容的隐藏与查找"><a href="#长内容的隐藏与查找" class="headerlink" title="长内容的隐藏与查找"></a>长内容的隐藏与查找</h2><p>在使用id进行查找时, 存在着有些内容返回过多, 不需要展示的情况(如请求的响应信息, 只在必要时才需要查找出来), 此时, 最好不要使用id前缀, 否则容易被长内容干扰, 抓不住重点.<br>为了解决这个问题, 可以在存在长内容的时候使用两条记录: 一条内容包含id, 同时包含一个随机串, 通过随机串可以查找到具体内容:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">log.info(logPrefix + &quot;:请求信息key:&quot; + uniqueKey);</span><br><span class="line">log.info(uniqueKey + &quot;: 请求详细信息: &quot; + result);</span><br></pre></td></tr></table></figure></p>
-<h2 id="日志记录的内容"><a href="#日志记录的内容" class="headerlink" title="日志记录的内容:"></a>日志记录的内容:</h2><ol>
+<h2><span id="chang-nei-rong-de-yin-cang-yu-cha-zhao">长内容的隐藏与查找</span><a href="#chang-nei-rong-de-yin-cang-yu-cha-zhao" class="header-anchor">#</a></h2><p>在使用id进行查找时, 存在着有些内容返回过多, 不需要展示的情况(如请求的响应信息, 只在必要时才需要查找出来), 此时, 最好不要使用id前缀, 否则容易被长内容干扰, 抓不住重点.<br>为了解决这个问题, 可以在存在长内容的时候使用两条记录: 一条内容包含id, 同时包含一个随机串, 通过随机串可以查找到具体内容:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">log.info(logPrefix + &quot;:请求信息key:&quot; + uniqueKey);</span><br><span class="line">log.info(uniqueKey + &quot;: 请求详细信息: &quot; + result);</span><br></pre></td></tr></table></figure></p>
+<h2><span id="ri-zhi-ji-lu-de-nei-rong">日志记录的内容:</span><a href="#ri-zhi-ji-lu-de-nei-rong" class="header-anchor">#</a></h2><ol>
 <li>标识部分: 用户标识/页面标识/关键判定/</li>
 <li>内容部分: Redis的k-v/请求数据/响应数据/错误信息/步骤信息</li>
 </ol>
-<h2 id="什么时候需要加日志"><a href="#什么时候需要加日志" class="headerlink" title="什么时候需要加日志:"></a>什么时候需要加日志:</h2><ol>
+<h2><span id="shi-me-shi-hou-xu-yao-jia-ri-zhi">什么时候需要加日志:</span><a href="#shi-me-shi-hou-xu-yao-jia-ri-zhi" class="header-anchor">#</a></h2><ol>
 <li>所有的外部依赖(请求/Redis/MongoDB/文件IO等)</li>
 <li>关键判断逻辑需要详细记录判定的依据, 次关键判断记录判定结果, 不关键的可以不加</li>
 </ol>

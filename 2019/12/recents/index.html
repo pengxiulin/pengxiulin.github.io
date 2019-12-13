@@ -73,29 +73,29 @@
 
 
 
-  <meta name="description" content="假设一个ip地址为192.168.16.9, 如何用纯数字保存这个数字? 转换公式为:192*256*256*256+168*256*256+16*256+9 = 3232239625 ping 3232239625即可得到和ping 192.168.16.9完全一样的结果. 注意, 转换后的值最大可能为2^32-1, 而int的最大值为: 2^31-1, 是会存在溢出的, 如何解决呢? 可以用l">
+  <meta name="description" content="记录近期一些学习内容      1. 软件功能方面 2. 基础设施 3. 自动化测试     1. 软件功能方面# 如何使用PlantUML绘制各种图 如何使用git 设计模式书学习 着手搜集UML图、架构图…… 协程概念  2. 基础设施# OpenResty安装、使用 如何配置和使用nginx-lua nginx-lua技术在现实场景中的应用和前景 -&amp;gt; 《你不得不使用NginxLua的若干">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何把IP地址转换为纯数字?">
-<meta property="og:url" content="https://pengxiulin.com/2017/06/ip2num/index.html">
+<meta property="og:title" content="近期的一些学习主题">
+<meta property="og:url" content="https://pengxiulin.com/2019/12/recents/index.html">
 <meta property="og:site_name" content="XStack">
-<meta property="og:description" content="假设一个ip地址为192.168.16.9, 如何用纯数字保存这个数字? 转换公式为:192*256*256*256+168*256*256+16*256+9 = 3232239625 ping 3232239625即可得到和ping 192.168.16.9完全一样的结果. 注意, 转换后的值最大可能为2^32-1, 而int的最大值为: 2^31-1, 是会存在溢出的, 如何解决呢? 可以用l">
+<meta property="og:description" content="记录近期一些学习内容      1. 软件功能方面 2. 基础设施 3. 自动化测试     1. 软件功能方面# 如何使用PlantUML绘制各种图 如何使用git 设计模式书学习 着手搜集UML图、架构图…… 协程概念  2. 基础设施# OpenResty安装、使用 如何配置和使用nginx-lua nginx-lua技术在现实场景中的应用和前景 -&amp;gt; 《你不得不使用NginxLua的若干">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-15T10:08:59.463Z">
+<meta property="og:updated_time" content="2019-12-13T05:50:47.033Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何把IP地址转换为纯数字?">
-<meta name="twitter:description" content="假设一个ip地址为192.168.16.9, 如何用纯数字保存这个数字? 转换公式为:192*256*256*256+168*256*256+16*256+9 = 3232239625 ping 3232239625即可得到和ping 192.168.16.9完全一样的结果. 注意, 转换后的值最大可能为2^32-1, 而int的最大值为: 2^31-1, 是会存在溢出的, 如何解决呢? 可以用l">
+<meta name="twitter:title" content="近期的一些学习主题">
+<meta name="twitter:description" content="记录近期一些学习内容      1. 软件功能方面 2. 基础设施 3. 自动化测试     1. 软件功能方面# 如何使用PlantUML绘制各种图 如何使用git 设计模式书学习 着手搜集UML图、架构图…… 协程概念  2. 基础设施# OpenResty安装、使用 如何配置和使用nginx-lua nginx-lua技术在现实场景中的应用和前景 -&amp;gt; 《你不得不使用NginxLua的若干">
 
 
 
 
 
 
-  <link rel="canonical" href="https://pengxiulin.com/2017/06/ip2num/">
+  <link rel="canonical" href="https://pengxiulin.com/2019/12/recents/">
 
 
 
 
-  <title>如何把IP地址转换为纯数字? | XStack</title>
+  <title>近期的一些学习主题 | XStack</title>
   
 
 
@@ -257,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pengxiulin.com/2017/06/ip2num/">
+    <link itemprop="mainEntityOfPage" href="https://pengxiulin.com/2019/12/recents/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xiulin">
@@ -274,7 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">如何把IP地址转换为纯数字?
+          <h1 class="post-title" itemprop="name headline">近期的一些学习主题
 
               
             
@@ -298,7 +298,7 @@
                 
               
 
-              <time title="创建时间：2017-06-02 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-02T00:00:00+08:00">2017-06-02</time>
+              <time title="创建时间：2019-12-13 11:23:21" itemprop="dateCreated datePublished" datetime="2019-12-13T11:23:21+08:00">2019-12-13</time>
             
 
             
@@ -333,10 +333,38 @@
       
 
       
-        <p>假设一个ip地址为192.168.16.9, 如何用纯数字保存这个数字?</p>
-<p>转换公式为:<br><code>192*256*256*256+168*256*256+16*256+9 = 3232239625</code></p>
-<p><code>ping 3232239625</code>即可得到和<code>ping 192.168.16.9</code>完全一样的结果.</p>
-<p>注意, 转换后的值最大可能为2^32-1, 而int的最大值为: 2^31-1, 是会存在溢出的, 如何解决呢? 可以用long, 不过有点浪费, 用unsigned int, 不过JS不用考虑这些…</p>
+        <blockquote>
+<p>记录近期一些学习内容</p>
+</blockquote>
+<div class="toc">
+
+<!-- toc -->
+<ul>
+<li><a href="#1-ruan-jian-gong-neng-fang-mian">1. 软件功能方面</a></li>
+<li><a href="#2-ji-chu-she-shi">2. 基础设施</a></li>
+<li><a href="#3-zi-dong-hua-ce-shi">3. 自动化测试</a></li>
+</ul>
+<!-- tocstop -->
+</div>
+
+<h2><span id="1-ruan-jian-gong-neng-fang-mian">1. 软件功能方面</span><a href="#1-ruan-jian-gong-neng-fang-mian" class="header-anchor">#</a></h2><ul>
+<li>如何使用PlantUML绘制各种图</li>
+<li>如何使用git</li>
+<li>设计模式书学习</li>
+<li>着手搜集UML图、架构图……</li>
+<li>协程概念</li>
+</ul>
+<h2><span id="2-ji-chu-she-shi">2. 基础设施</span><a href="#2-ji-chu-she-shi" class="header-anchor">#</a></h2><ul>
+<li>OpenResty安装、使用</li>
+<li>如何配置和使用nginx-lua</li>
+<li><p>nginx-lua技术在现实场景中的应用和前景 -> 《你不得不使用NginxLua的若干个理由》</p>
+</li>
+<li><p>GraphQL使用</p>
+</li>
+</ul>
+<h2><span id="3-zi-dong-hua-ce-shi">3. 自动化测试</span><a href="#3-zi-dong-hua-ce-shi" class="header-anchor">#</a></h2><ul>
+<li>如何使用Puppteer</li>
+</ul>
 
       
     </div>
@@ -367,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/e-papers/" rel="next" title="墨水屏开发板相关购买链接记录">
-                <i class="fa fa-chevron-left"></i> 墨水屏开发板相关购买链接记录
+              <a href="/2019/12/sketch-plugin-init/" rel="next" title="如何快速生成一个sketch插件">
+                <i class="fa fa-chevron-left"></i> 如何快速生成一个sketch插件
               </a>
             
           </div>
@@ -376,10 +404,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/font-define-combination/" rel="prev" title="一个特殊的组合导致的字体切换">
-                一个特殊的组合导致的字体切换 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -417,8 +441,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -497,6 +530,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">1. 软件功能方面#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">2. 基础设施#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">3. 自动化测试#</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

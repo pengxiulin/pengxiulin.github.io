@@ -73,18 +73,18 @@
 
 
 
-  <meta name="description" content="近期用到，记录一下  使用skpm快速生成 参考文档 更多资料  使用skpm快速生成#skpm是sketch官方出的快速生成插件的工具，目前已经越来越成熟了 1234567891011121314151617181920$ nmp install -g skpm$ skpm create first-plugin✔ Done!The Sketch developer mode is not en">
+  <meta name="description" content="近期用到sketch插件相关内容，记录一下      使用skpm快速生成 参考文档 更多资料     使用skpm快速生成#skpm是sketch官方出的快速生成插件的工具，目前已经越来越成熟了 1234567891011121314151617181920$ nmp install -g skpm$ skpm create first-plugin✔ Done!The Sketch deve">
 <meta name="keywords" content="插件,sketch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何快速生成一个sketch插件">
 <meta property="og:url" content="https://pengxiulin.com/2019/12/sketch-plugin-init/index.html">
 <meta property="og:site_name" content="XStack">
-<meta property="og:description" content="近期用到，记录一下  使用skpm快速生成 参考文档 更多资料  使用skpm快速生成#skpm是sketch官方出的快速生成插件的工具，目前已经越来越成熟了 1234567891011121314151617181920$ nmp install -g skpm$ skpm create first-plugin✔ Done!The Sketch developer mode is not en">
+<meta property="og:description" content="近期用到sketch插件相关内容，记录一下      使用skpm快速生成 参考文档 更多资料     使用skpm快速生成#skpm是sketch官方出的快速生成插件的工具，目前已经越来越成熟了 1234567891011121314151617181920$ nmp install -g skpm$ skpm create first-plugin✔ Done!The Sketch deve">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-04T11:10:18.003Z">
+<meta property="og:updated_time" content="2019-12-13T03:21:07.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何快速生成一个sketch插件">
-<meta name="twitter:description" content="近期用到，记录一下  使用skpm快速生成 参考文档 更多资料  使用skpm快速生成#skpm是sketch官方出的快速生成插件的工具，目前已经越来越成熟了 1234567891011121314151617181920$ nmp install -g skpm$ skpm create first-plugin✔ Done!The Sketch developer mode is not en">
+<meta name="twitter:description" content="近期用到sketch插件相关内容，记录一下      使用skpm快速生成 参考文档 更多资料     使用skpm快速生成#skpm是sketch官方出的快速生成插件的工具，目前已经越来越成熟了 1234567891011121314151617181920$ nmp install -g skpm$ skpm create first-plugin✔ Done!The Sketch deve">
 
 
 
@@ -334,12 +334,20 @@
       
 
       
-        <p>近期用到，记录一下</p>
+        <blockquote>
+<p>近期用到sketch插件相关内容，记录一下</p>
+</blockquote>
+<div class="toc">
+
+<!-- toc -->
 <ul>
-<li><a href="#使用skpm快速生成">使用skpm快速生成</a></li>
-<li><a href="#参考文档">参考文档</a></li>
-<li><a href="#更多资料">更多资料</a></li>
+<li><a href="#shi-yong-skpm-kuai-su-sheng-cheng">使用skpm快速生成</a></li>
+<li><a href="#can-kao-wen-dang">参考文档</a></li>
+<li><a href="#geng-duo-zi-liao">更多资料</a></li>
 </ul>
+<!-- tocstop -->
+</div>
+
 <h2><span id="shi-yong-skpm-kuai-su-sheng-cheng">使用skpm快速生成</span><a href="#shi-yong-skpm-kuai-su-sheng-cheng" class="header-anchor">#</a></h2><p>skpm是sketch官方出的快速生成插件的工具，目前已经越来越成熟了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ nmp install -g skpm</span><br><span class="line">$ skpm create first-plugin</span><br><span class="line">✔ Done!</span><br><span class="line"></span><br><span class="line">The Sketch developer mode is not enabled (http://developer.sketchapp.com/introduction/preferences/<span class="comment">#always-reload-scripts-before-running).</span></span><br><span class="line">Do you want to <span class="built_in">enable</span> it? (y/N) y</span><br><span class="line">success Sketch developer mode enabled</span><br><span class="line"></span><br><span class="line">To get started, <span class="built_in">cd</span> into the new directory:</span><br><span class="line">  <span class="built_in">cd</span> first-plugin</span><br><span class="line"></span><br><span class="line">To start a development live-reload build:</span><br><span class="line">  npm run start</span><br><span class="line"></span><br><span class="line">To build the plugin:</span><br><span class="line">  npm run build</span><br><span class="line"></span><br><span class="line">To publish the plugin:</span><br><span class="line">  skpm publish</span><br><span class="line">$ <span class="built_in">cd</span> first-plugin</span><br></pre></td></tr></table></figure>
 <p>如果你在刚才的提问环节选择了y，那么，打开sketch就可以看到一个菜单，点击一下，就可以输出了</p>
@@ -396,6 +404,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/recents/" rel="prev" title="近期的一些学习主题">
+                近期的一些学习主题 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -458,7 +470,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

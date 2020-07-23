@@ -74,32 +74,29 @@
 
 
 
-  <meta name="description" content="1&amp;#123;font-family: &amp;quot;Helvetica Neue&amp;quot;;font-weight: 500;&amp;#125; Helvetica Neue字体, 在macOS下使用PingFang SC渲染,当定义了font-weight:500后, 会变成PingFang TC. Chrome和Safari都是如此. 怀疑可能是WebKit中做的处理.">
-<meta name="keywords" content="CSS">
+  <meta name="description" content="简介信息        有时候，CDN不太好使，比如，有些节点上访问资源不正常在拿到了IP地址的情况下，可以通过Header中指定Host的形式来请求，比如： 1curl http://&amp;lt;IP Address&amp;gt;/www/store/dist/fonts/ionicons.eot?v=2.0.1 -H &apos;Host: &amp;lt;Domain Name&amp;gt;&apos;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一个特殊的组合导致的字体切换">
-<meta property="og:url" content="https://pengxiulin.com/2017/06/font-define-combination/index.html">
+<meta property="og:title" content="如何在特定IP上验证网站的可访问性">
+<meta property="og:url" content="https://pengxiulin.com/2020/06/curl-test-ip/index.html">
 <meta property="og:site_name" content="XStack">
-<meta property="og:description" content="1&amp;#123;font-family: &amp;quot;Helvetica Neue&amp;quot;;font-weight: 500;&amp;#125; Helvetica Neue字体, 在macOS下使用PingFang SC渲染,当定义了font-weight:500后, 会变成PingFang TC. Chrome和Safari都是如此. 怀疑可能是WebKit中做的处理.">
+<meta property="og:description" content="简介信息        有时候，CDN不太好使，比如，有些节点上访问资源不正常在拿到了IP地址的情况下，可以通过Header中指定Host的形式来请求，比如： 1curl http://&amp;lt;IP Address&amp;gt;/www/store/dist/fonts/ionicons.eot?v=2.0.1 -H &apos;Host: &amp;lt;Domain Name&amp;gt;&apos;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://pengxiulin.com/static/chu.png">
-<meta property="og:updated_time" content="2020-03-30T05:51:21.245Z">
+<meta property="og:updated_time" content="2020-07-22T03:10:44.230Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个特殊的组合导致的字体切换">
-<meta name="twitter:description" content="1&amp;#123;font-family: &amp;quot;Helvetica Neue&amp;quot;;font-weight: 500;&amp;#125; Helvetica Neue字体, 在macOS下使用PingFang SC渲染,当定义了font-weight:500后, 会变成PingFang TC. Chrome和Safari都是如此. 怀疑可能是WebKit中做的处理.">
-<meta name="twitter:image" content="https://pengxiulin.com/static/chu.png">
+<meta name="twitter:title" content="如何在特定IP上验证网站的可访问性">
+<meta name="twitter:description" content="简介信息        有时候，CDN不太好使，比如，有些节点上访问资源不正常在拿到了IP地址的情况下，可以通过Header中指定Host的形式来请求，比如： 1curl http://&amp;lt;IP Address&amp;gt;/www/store/dist/fonts/ionicons.eot?v=2.0.1 -H &apos;Host: &amp;lt;Domain Name&amp;gt;&apos;">
 
 
 
 
 
 
-  <link rel="canonical" href="https://pengxiulin.com/2017/06/font-define-combination/">
+  <link rel="canonical" href="https://pengxiulin.com/2020/06/curl-test-ip/">
 
 
 
 
-  <title>一个特殊的组合导致的字体切换 | XStack</title>
+  <title>如何在特定IP上验证网站的可访问性 | XStack</title>
   
 
 
@@ -261,7 +258,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pengxiulin.com/2017/06/font-define-combination/">
+    <link itemprop="mainEntityOfPage" href="https://pengxiulin.com/2020/06/curl-test-ip/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xiulin">
@@ -278,7 +275,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">一个特殊的组合导致的字体切换
+          <h2 class="post-title" itemprop="name headline">如何在特定IP上验证网站的可访问性
 
               
             
@@ -302,7 +299,7 @@
                 
               
 
-              <time title="创建时间：2017-06-22 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-22T00:00:00+08:00">2017-06-22</time>
+              <time title="创建时间：2020-06-11 17:54:51" itemprop="dateCreated datePublished" datetime="2020-06-11T17:54:51+08:00">2020-06-11</time>
             
 
             
@@ -337,10 +334,17 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;font-family: &quot;Helvetica Neue&quot;;font-weight: 500;&#125;</span><br></pre></td></tr></table></figure>
-<p>Helvetica Neue字体, 在macOS下使用<code>PingFang SC</code>渲染,<br>当定义了font-weight:500后, 会变成<code>PingFang TC</code>.</p>
-<p>Chrome和Safari都是如此. 怀疑可能是WebKit中做的处理.</p>
-<p><img src="/static/chu.png" alt="初"></p>
+        <blockquote>
+<p>简介信息</p>
+</blockquote>
+<div class="toc">
+
+<!-- toc -->
+<!-- tocstop -->
+</div>
+
+<p>有时候，CDN不太好使，比如，有些节点上访问资源不正常<br>在拿到了IP地址的情况下，可以通过Header中指定Host的形式来请求，比如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://&lt;IP Address&gt;/www/store/dist/fonts/ionicons.eot?v=2.0.1 -H <span class="string">'Host: &lt;Domain Name&gt;'</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -362,12 +366,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/CSS/" rel="tag"># CSS</a>
-          
-        </div>
-      
 
       
       
@@ -377,8 +375,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/ip2num/" rel="next" title="如何把IP地址转换为纯数字?">
-                <i class="fa fa-chevron-left"></i> 如何把IP地址转换为纯数字?
+              <a href="/2019/12/cc-resources/" rel="next" title="视频、音频、图片资源">
+                <i class="fa fa-chevron-left"></i> 视频、音频、图片资源
               </a>
             
           </div>
@@ -386,10 +384,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/plantuml/" rel="prev" title="PlantUML测试">
-                PlantUML测试 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

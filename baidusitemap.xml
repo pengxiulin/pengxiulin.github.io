@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://pengxiulin.com/2020/09/france-char-input/</loc>
+    <lastmod>2020-09-10</lastmod>
+  </url>
+  <url>
     <loc>https://pengxiulin.com/2020/06/curl-test-ip/</loc>
     <lastmod>2020-07-22</lastmod>
   </url>
@@ -53,15 +57,11 @@
     <lastmod>2019-01-15</lastmod>
   </url>
   <url>
-    <loc>https://pengxiulin.com/2016/04/throttle-debounce/</loc>
-    <lastmod>2019-01-15</lastmod>
-  </url>
-  <url>
     <loc>https://pengxiulin.com/2017/04/zsh-prompt/</loc>
     <lastmod>2019-01-15</lastmod>
   </url>
   <url>
-    <loc>https://pengxiulin.com/2017/04/node-listen-usb/</loc>
+    <loc>https://pengxiulin.com/2016/04/throttle-debounce/</loc>
     <lastmod>2019-01-15</lastmod>
   </url>
   <url>
@@ -69,11 +69,11 @@
     <lastmod>2019-01-15</lastmod>
   </url>
   <url>
-    <loc>https://pengxiulin.com/2017/04/macOS-bin/</loc>
+    <loc>https://pengxiulin.com/2017/01/macOS-update-wallpaper/</loc>
     <lastmod>2019-01-15</lastmod>
   </url>
   <url>
-    <loc>https://pengxiulin.com/2017/01/macOS-update-wallpaper/</loc>
+    <loc>https://pengxiulin.com/2017/04/macOS-bin/</loc>
     <lastmod>2019-01-15</lastmod>
   </url>
   <url>
@@ -81,11 +81,15 @@
     <lastmod>2019-01-15</lastmod>
   </url>
   <url>
-    <loc>https://pengxiulin.com/2016/05/http-range/</loc>
+    <loc>https://pengxiulin.com/2017/04/node-listen-usb/</loc>
     <lastmod>2019-01-15</lastmod>
   </url>
   <url>
     <loc>https://pengxiulin.com/2017/05/log-experience/</loc>
+    <lastmod>2019-01-15</lastmod>
+  </url>
+  <url>
+    <loc>https://pengxiulin.com/2016/05/http-range/</loc>
     <lastmod>2019-01-15</lastmod>
   </url>
   <url>
@@ -101,11 +105,11 @@
     <lastmod>2019-01-15</lastmod>
   </url>
   <url>
-    <loc>https://pengxiulin.com/2017/06/e-papers/</loc>
+    <loc>https://pengxiulin.com/2017/05/customized-range/</loc>
     <lastmod>2019-01-15</lastmod>
   </url>
   <url>
-    <loc>https://pengxiulin.com/2017/05/customized-range/</loc>
+    <loc>https://pengxiulin.com/2017/06/e-papers/</loc>
     <lastmod>2019-01-15</lastmod>
   </url>
   <url>
